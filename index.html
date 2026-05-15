@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CA Skills Landscape — California Workforce Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream:   #F5F4F0;
+  --cream2:  #EDEAE2;
+  --white:   #FFFFFF;
+  --dark:    #1A1A1A;
+  --muted:   #6B6B6B;
+  --light:   #9A9A9A;
+  --border:  rgba(0,0,0,0.08);
+  --border2: rgba(0,0,0,0.12);
+  --navy:    #1E2761;
+  --navy-lt: #EEF1FA;
+  --teal:    #1D6B52;
+  --teal-lt: #E6F2EE;
+  --amber:   #8A5A00;
+  --amber-lt:#FFF3DC;
+  --red:     #8B2020;
+  --red-lt:  #FBE8E8;
+  --blue:    #1A4B7A;
+  --blue-lt: #E8F0F8;
+  --sidebar-w: 280px;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans:  'IBM Plex Sans', -apple-system, sans-serif;
+  --mono:  'IBM Plex Mono', monospace;
+}
+body { font-family: var(--sans); background: var(--cream); color: var(--dark); min-height: 100vh; display: flex; font-size: 15px; }
+
+/* ── Sidebar ── */
+.sidebar {
+  width: var(--sidebar-w); flex-shrink: 0; background: var(--white);
+  border-right: 1px solid var(--border2); height: 100vh; position: sticky;
+  top: 0; display: flex; flex-direction: column; overflow-y: auto;
+}
+.sidebar-logo { padding: 24px 22px 20px; border-bottom: 1px solid var(--border); }
+.logo-mark { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--dark); line-height: 1; }
+.logo-mark span { color: var(--navy); }
+.logo-sub { font-size: 11.5px; color: var(--muted); margin-top: 5px; line-height: 1.5; font-weight: 400; }
+
+.nav-section { padding: 18px 0 4px; }
+.nav-section-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--light); padding: 0 22px 8px; font-family: var(--sans);
+}
+.nav-item {
+  display: flex; align-items: flex-start; gap: 11px; padding: 9px 22px;
+  cursor: pointer; transition: all 0.14s; border-left: 3px solid transparent;
+  text-decoration: none;
+}
+.nav-item:hover { background: var(--cream); }
+.nav-item.active { background: var(--teal-lt); border-left-color: var(--teal); }
+.nav-icon {
+  width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center;
+  justify-content: center; flex-shrink: 0; margin-top: 1px; font-size: 13px;
+  background: var(--cream2); color: var(--muted);
+}
+.nav-item.active .nav-icon { background: var(--teal-lt); color: var(--teal); }
+.nav-text { flex: 1; }
+.nav-label { font-size: 13.5px; font-weight: 500; color: var(--dark); line-height: 1.2; }
+.nav-item.active .nav-label { color: var(--teal); }
+.nav-sub { font-size: 11.5px; color: var(--muted); margin-top: 2px; line-height: 1.3; }
+
+.sidebar-scope {
+  margin-top: auto; padding: 16px 22px; border-top: 1px solid var(--border);
+  background: var(--cream);
+}
+.scope-label { font-size: 10px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--light); margin-bottom: 8px; }
+.scope-item { font-size: 11.5px; color: var(--muted); margin-bottom: 3px; display: flex; align-items: center; gap: 5px; }
+.scope-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--light); flex-shrink: 0; }
+
+/* ── Main content ── */
+.main { flex: 1; min-width: 0; }
+
+/* ── Page ── */
+.page { display: none; padding: 48px 52px 72px; max-width: 1060px; }
+.page.active { display: block; }
+
+.page-eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+}
+.page-eyebrow::before { content: '—'; color: var(--light); }
+.page-title { font-family: var(--serif); font-size: 38px; font-weight: 500; line-height: 1.15; color: var(--dark); margin-bottom: 14px; }
+.page-desc { font-size: 14.5px; color: var(--muted); line-height: 1.7; max-width: 680px; margin-bottom: 40px; border-bottom: 1px solid var(--border); padding-bottom: 32px; }
+
+/* ── Cards ── */
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 32px; }
+.card-grid.single { grid-template-columns: 1fr; }
+.card-grid.triple { grid-template-columns: 1fr 1fr 1fr; }
+.card {
+  background: var(--white); border: 1px solid var(--border2); border-radius: 12px;
+  padding: 24px 26px; transition: box-shadow 0.15s;
+}
+.card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+.card-title { font-family: var(--serif); font-size: 19px; font-weight: 500; margin-bottom: 10px; color: var(--dark); line-height: 1.3; }
+.card-body { font-size: 13.5px; color: var(--muted); line-height: 1.7; }
+
+/* ── Stat row ── */
+.stat-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 36px; }
+.stat-card { background: var(--white); border: 1px solid var(--border2); border-radius: 10px; padding: 18px 20px; }
+.stat-num { font-family: var(--mono); font-size: 30px; font-weight: 500; color: var(--dark); line-height: 1; letter-spacing: -0.02em; }
+.stat-lbl { font-size: 11.5px; color: var(--muted); margin-top: 5px; font-weight: 400; }
+
+/* ── Divider heading ── */
+.section-heading {
+  font-size: 10.5px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--light); margin: 32px 0 14px; display: flex; align-items: center; gap: 10px;
+}
+.section-heading::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* ── EXHIBIT 1: Scenario simulator ── */
+.controls-bar {
+  background: var(--white); border: 1px solid var(--border2); border-radius: 10px;
+  padding: 18px 22px; margin-bottom: 22px; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-end;
+}
+.ctrl-grp { display: flex; flex-direction: column; gap: 7px; }
+.ctrl-lbl { font-size: 10px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+.btn-row { display: flex; gap: 7px; }
+.s-btn {
+  font-size: 13px; font-family: var(--sans); padding: 7px 16px; border-radius: 7px;
+  border: 1px solid var(--border2); background: var(--cream); color: var(--muted);
+  cursor: pointer; transition: all 0.14s;
+}
+.s-btn:hover { border-color: var(--dark); color: var(--dark); }
+.s-btn.active { background: var(--navy); color: var(--white); border-color: var(--navy); font-weight: 500; }
+.s-btn.active-high { background: var(--red); color: var(--white); border-color: var(--red); font-weight: 500; }
+
+.metrics-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 22px; }
+.metric { background: var(--white); border: 1px solid var(--border2); border-radius: 10px; padding: 16px 18px; }
+.metric-lbl { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 7px; }
+.metric-val { font-family: var(--mono); font-size: 26px; font-weight: 500; color: var(--dark); line-height: 1; }
+.metric-sub { font-size: 11px; color: var(--light); margin-top: 4px; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.panel { background: var(--white); border: 1px solid var(--border2); border-radius: 12px; padding: 22px 24px; }
+.panel-title { font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
+
+.skill-row { margin-bottom: 14px; }
+.skill-hdr { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.skill-name { font-size: 13.5px; color: var(--dark); font-weight: 400; }
+.skill-right { display: flex; align-items: center; gap: 7px; }
+.skill-val { font-family: var(--mono); font-size: 13px; font-weight: 500; }
+.pill { font-size: 10px; font-family: var(--mono); padding: 2px 7px; border-radius: 6px; font-weight: 500; }
+.pill-up { background: var(--teal-lt); color: var(--teal); }
+.pill-dn { background: var(--red-lt); color: var(--red); }
+.pill-flat { background: var(--cream2); color: var(--muted); }
+.bar-track { height: 6px; background: var(--cream2); border-radius: 3px; position: relative; overflow: hidden; }
+.bar-base { position: absolute; top:0; left:0; height:100%; border-radius:3px; opacity:0.2; }
+.bar-fill { position: absolute; top:0; left:0; height:100%; border-radius:3px; transition: width 0.4s cubic-bezier(.4,0,.2,1); }
+
+.cmp-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+.cmp-cell { background: var(--cream); border-radius: 8px; padding: 12px 14px; border: 1px solid var(--border); }
+.cmp-head { font-size: 12px; font-weight: 600; margin-bottom: 10px; }
+.cmp-sk { display: flex; justify-content: space-between; margin-bottom: 3px; }
+.cmp-sk-n { font-size: 10px; color: var(--muted); }
+.cmp-sk-v { font-family: var(--mono); font-size: 10px; font-weight: 500; }
+.mini-bar { height: 3px; background: var(--cream2); border-radius: 2px; margin-bottom: 6px; overflow: hidden; }
+.mini-fill { height: 100%; border-radius: 2px; }
+
+.key-box { background: var(--navy-lt); border: 1px solid rgba(30,39,97,0.15); border-radius: 8px; padding: 13px 16px; margin-top: 18px; font-size: 12.5px; color: var(--navy); line-height: 1.6; }
+
+/* ── EXHIBIT 2: Workforce explorer ── */
+.filter-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 18px; }
+.filter-lbl { font-size: 10px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+.f-btn { font-size: 12px; padding: 5px 12px; border-radius: 6px; border: 1px solid var(--border2); background: var(--cream); color: var(--muted); cursor: pointer; transition: all .14s; font-family: var(--sans); }
+.f-btn.active[data-w="High"]    { background: var(--blue);  color: #fff; border-color: var(--blue); }
+.f-btn.active[data-w="Mid-high"]{ background: var(--teal);  color: #fff; border-color: var(--teal); }
+.f-btn.active[data-w="Mid-low"] { background: var(--amber); color: #fff; border-color: var(--amber); }
+.f-btn.active[data-w="Low"]     { background: var(--red);   color: #fff; border-color: var(--red); }
+.f-btn.active[data-w="all"]     { background: var(--navy);  color: #fff; border-color: var(--navy); }
+.search-input { font-size: 13px; padding: 6px 12px; border-radius: 7px; border: 1px solid var(--border2); background: var(--white); color: var(--dark); font-family: var(--sans); width: 190px; outline: none; }
+.search-input:focus { border-color: var(--navy); }
+.view-toggle { display: flex; gap: 6px; }
+.v-btn { font-size: 12.5px; font-family: var(--sans); padding: 6px 14px; border-radius: 7px; border: 1px solid var(--border2); background: var(--cream); color: var(--muted); cursor: pointer; transition: all .14s; }
+.v-btn.active { background: var(--navy); color: #fff; border-color: var(--navy); font-weight: 500; }
+
+.chart-panel { background: var(--white); border: 1px solid var(--border2); border-radius: 12px; padding: 22px 24px; }
+.chart-panel-title { font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.legend-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; font-size: 11.5px; color: var(--muted); }
+.leg-item { display: flex; align-items: center; gap: 5px; }
+.leg-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+canvas { display: block; width: 100%; }
+.tip { position: absolute; background: var(--white); border: 1px solid var(--border2); border-radius: 9px; padding: 10px 13px; font-size: 12px; pointer-events: none; display: none; max-width: 240px; z-index: 20; box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+.tip strong { font-weight: 600; display: block; margin-bottom: 3px; font-size: 13px; }
+.tip span { color: var(--muted); display: block; line-height: 1.6; }
+.chart-outer { position: relative; width: 100%; }
+.axis-lbl { font-size: 11px; color: var(--muted); text-align: center; margin-top: 4px; }
+.detail-box { background: var(--cream); border: 1px solid var(--border); border-radius: 9px; padding: 12px 15px; margin-top: 12px; min-height: 56px; }
+.detail-box .dt { font-size: 13.5px; font-weight: 500; margin-bottom: 3px; }
+.detail-box .dm { font-size: 12px; color: var(--muted); line-height: 1.5; }
+.sec-grid4 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.sec-card { background: var(--white); border-radius: 10px; border: 1px solid var(--border2); padding: 14px 16px; }
+.sec-card-head { font-size: 13.5px; font-weight: 600; margin-bottom: 7px; }
+
+/* ── EXHIBIT 3: Geo & Displacement ── */
+.map-layout { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.4fr); gap: 16px; }
+.map-card { background: var(--white); border-radius: 12px; border: 1px solid var(--border2); padding: 18px 20px; }
+.map-card-title { font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.map-bg { background: #E8EDF5; border-radius: 8px; position: relative; overflow: hidden; }
+.map-tip { position: absolute; background: var(--white); border: 1px solid var(--border2); border-radius: 8px; padding: 9px 12px; font-size: 12px; pointer-events: none; display: none; max-width: 200px; z-index: 10; box-shadow: 0 4px 14px rgba(0,0,0,0.1); }
+.map-tip strong { font-weight: 600; display: block; margin-bottom: 2px; }
+.map-tip span { color: var(--muted); display: block; line-height: 1.6; }
+.leg-sq { width: 9px; height: 9px; border-radius: 2px; flex-shrink: 0; }
+.rank-scroll { overflow-y: auto; max-height: 340px; }
+.rank-row { display: flex; align-items: center; gap: 9px; margin-bottom: 5px; cursor: pointer; padding: 4px 6px; border-radius: 6px; transition: background 0.12s; }
+.rank-row:hover, .rank-row.sel { background: var(--cream); }
+.rank-name { font-size: 12.5px; color: var(--dark); min-width: 155px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex-shrink: 0; }
+.rank-track { flex: 1; height: 5px; background: var(--cream2); border-radius: 3px; overflow: hidden; }
+.rank-bar { height: 100%; border-radius: 3px; }
+.rank-val { font-family: var(--mono); font-size: 11px; color: var(--muted); min-width: 38px; text-align: right; flex-shrink: 0; }
+.detail-panel { background: var(--cream); border-radius: 9px; padding: 14px 16px; margin-top: 12px; border: 1px solid var(--border); }
+.det-title { font-size: 13.5px; font-weight: 500; margin-bottom: 8px; }
+.stacked { display: flex; height: 13px; border-radius: 4px; overflow: hidden; margin-bottom: 4px; }
+.stacked-labels { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 10px; color: var(--muted); }
+
+/* ── Forecaster ── */
+.fc-controls { background: var(--white); border: 1px solid var(--border2); border-radius: 12px; padding: 20px 24px; margin-bottom: 20px; }
+.fc-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 18px; }
+.fc-group { display: flex; flex-direction: column; gap: 6px; }
+.fc-group label { font-size: 10px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+.fc-select {
+  width: 100%; padding: 8px 32px 8px 12px; border: 1px solid var(--border2); border-radius: 8px;
+  font-family: var(--sans); font-size: 13px; color: var(--dark); background: var(--cream);
+  appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6B6B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 10px center; cursor: pointer; outline: none; transition: border-color 0.14s;
+}
+.fc-select:focus { border-color: var(--navy); }
+.fc-btn { background: var(--navy); color: var(--white); border: none; padding: 10px 22px; border-radius: 8px; font-family: var(--sans); font-size: 13px; font-weight: 500; cursor: pointer; transition: opacity 0.15s; }
+.fc-btn:hover { opacity: 0.88; }
+.fc-output { display: none; }
+.fc-header { background: var(--navy); border-radius: 12px; padding: 18px 24px; margin-bottom: 16px; }
+.fc-header h3 { font-family: var(--serif); font-size: 20px; color: var(--white); margin-bottom: 5px; }
+.fc-header .fc-meta { font-family: var(--mono); font-size: 11px; color: var(--ice); }
+.fc-kpi-row { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; margin-bottom: 16px; }
+.fc-kpi { background: var(--white); border: 1px solid var(--border2); border-radius: 10px; padding: 14px 16px; text-align: center; }
+.fc-kpi-val { font-family: var(--mono); font-size: 20px; font-weight: 500; line-height: 1; margin-bottom: 5px; letter-spacing: -0.02em; }
+.fc-kpi-lbl { font-size: 10px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.fc-warning { background: var(--amber-lt); border: 1px solid #E8C87A; border-left: 4px solid var(--amber); border-radius: 8px; padding: 12px 16px; font-size: 12px; color: #5A3A00; margin-bottom: 16px; line-height: 1.6; }
+.fc-reco { background: var(--white); border: 1px solid var(--border2); border-left: 3px solid var(--teal); border-radius: 12px; padding: 20px 22px; margin-bottom: 16px; }
+.fc-reco h4 { font-size: 10px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+.fc-reco p { font-size: 13px; color: var(--dark); line-height: 1.7; margin-bottom: 8px; }
+.fc-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.fc-pill { padding: 3px 10px; border-radius: 8px; font-size: 11px; font-weight: 600; font-family: var(--mono); }
+.fc-pill-pos { background: var(--teal-lt); color: var(--teal); border: 1px solid rgba(29,107,82,0.2); }
+.fc-pill-neg { background: var(--red-lt); color: var(--red); border: 1px solid rgba(139,32,32,0.2); }
+.fc-charts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.fc-chart-card { background: var(--white); border: 1px solid var(--border2); border-radius: 12px; padding: 18px 20px; }
+.fc-chart-card h4 { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+.fc-model-note { font-size: 11px; color: var(--light); font-family: var(--mono); line-height: 1.7; padding: 14px 18px; background: var(--cream); border-radius: 8px; border: 1px solid var(--border); margin-top: 4px; }
+
+/* ── Footer ── */
+footer { padding: 32px 52px; font-size: 11.5px; color: var(--light); font-family: var(--mono); border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<!-- ── SIDEBAR ── -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">CA Skills<span> OS</span></div>
+    <div class="logo-sub">California workforce intelligence for agriculture, construction, transportation, and energy.</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">Decision Tools</div>
+    <a class="nav-item" onclick="showPage('forecaster')">
+      <div class="nav-icon">⚡</div>
+      <div class="nav-text">
+        <div class="nav-label">Workforce Forecaster</div>
+        <div class="nav-sub">ARIMA + AI skills intelligence</div>
+      </div>
+    </a>
+    <a class="nav-item active" onclick="showPage('simulator')">
+      <div class="nav-icon">⟳</div>
+      <div class="nav-text">
+        <div class="nav-label">Scenario Simulator</div>
+        <div class="nav-sub">Skill demand under AI adoption</div>
+      </div>
+    </a>
+    <a class="nav-item" onclick="showPage('explorer')">
+      <div class="nav-icon">◉</div>
+      <div class="nav-text">
+        <div class="nav-label">Workforce Explorer</div>
+        <div class="nav-sub">AI exposure by occupation</div>
+      </div>
+    </a>
+    <a class="nav-item" onclick="showPage('geo')">
+      <div class="nav-icon">⊕</div>
+      <div class="nav-text">
+        <div class="nav-label">Geographic Map</div>
+        <div class="nav-sub">MSA employment &amp; displacement</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">About This Project</div>
+    <a class="nav-item" onclick="showPage('guide')">
+      <div class="nav-icon">☰</div>
+      <div class="nav-text">
+        <div class="nav-label">Project Guide</div>
+        <div class="nav-sub">How to use this exhibit</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="sidebar-scope">
+    <div class="scope-label">California Scope</div>
+    <div class="scope-item"><span class="scope-dot"></span>25 MSAs across California</div>
+    <div class="scope-item"><span class="scope-dot"></span>2.2M sector workers analyzed</div>
+    <div class="scope-item"><span class="scope-dot"></span>4 sectors · 5 macro skills</div>
+    <div class="scope-item"><span class="scope-dot"></span>BLS OEWS May 2024 + ONET</div>
+  </div>
+</nav>
+
+<!-- ── MAIN CONTENT ── -->
+<div class="main">
+
+  <!-- PAGE: Guide -->
+  <div class="page" id="page-guide">
+    <div class="page-eyebrow">Project Guide</div>
+    <h1 class="page-title">California Skills Landscape</h1>
+    <p class="page-desc">Start here before a demo. This exhibit maps the current skill composition of California's four key physical-economy sectors, scores each occupation's AI exposure using ONET macro skill data, and projects how skill demand shifts as AI adoption increases across 25 metropolitan areas.</p>
+    <div class="stat-row">
+      <div class="stat-card"><div class="stat-num">2.2M</div><div class="stat-lbl">Sector workers analyzed</div></div>
+      <div class="stat-card"><div class="stat-num">25</div><div class="stat-lbl">California MSAs</div></div>
+      <div class="stat-card"><div class="stat-num">4</div><div class="stat-lbl">Sectors</div></div>
+      <div class="stat-card"><div class="stat-num">5</div><div class="stat-lbl">Macro skill dimensions</div></div>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-title">What each tool helps answer</div>
+        <div class="card-body">The Scenario Simulator shows how skill shares shift under low and high AI adoption. The Workforce Explorer plots occupations by AI exposure and wage. The Geographic Map shows where sector employment and displacement pressure concentrate across California.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Why California-specific interpretation matters</div>
+        <div class="card-body">The same signal looks very different depending on regional labor composition and policy context. Agriculture in the Central Valley, logistics in the Inland Empire, and clean energy across the Bay Area all respond differently to AI adoption pressure.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">How to read the skill shares</div>
+        <div class="card-body">Each occupation carries a skill profile — the share of its work that falls into Communication, Computers, Information, Machinery, and Management. These shares are employment-weighted to reflect where California's sector workforce actually sits, not what's most common nationally.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Suggested 3-minute walkthrough</div>
+        <div class="card-body">Start with the Scenario Simulator — select Transportation and toggle to High Adoption to see the clearest skill shift story. Then open the Geographic Map and switch to Displacement Pressure to see where transition pressure concentrates geographically.</div>
+      </div>
+    </div>
+    <div class="section-heading">Data sources</div>
+    <div class="card-grid triple">
+      <div class="card"><div class="card-title" style="font-size:15px">BLS OEWS May 2024</div><div class="card-body">Occupation-level employment and wages for all 25 California MSAs. The primary employment data source.</div></div>
+      <div class="card"><div class="card-title" style="font-size:15px">ONET Macro Skills</div><div class="card-body">Five macro skill shares per occupation — Communication, Computers, Information, Machinery, Management.</div></div>
+      <div class="card"><div class="card-title" style="font-size:15px">Scenario modeling</div><div class="card-body">Mechanical displacement model: low (10/8%) and high (45/38%) automation of computers/machinery tasks.</div></div>
+    </div>
+  </div>
+
+  <!-- PAGE: Workforce Forecaster -->
+  <div class="page" id="page-forecaster">
+    <div class="page-eyebrow">Decision Tools</div>
+    <h1 class="page-title">Workforce Forecaster</h1>
+    <p class="page-desc">Skills intelligence built on ARIMA(1,1,1) forecasts of CA EDD monthly employment data (1990–2025) combined with O*NET macro skill weights. Select a sector and job role to generate a directional hiring and reskilling signal.</p>
+
+    <div class="fc-controls">
+      <div class="fc-grid">
+        <div class="fc-group">
+          <label>Sector</label>
+          <select class="fc-select" id="fc-sector" onchange="fcUpdateRoles()">
+            <option>Construction</option>
+            <option>Energy</option>
+            <option>Transportation</option>
+            <option>Agriculture</option>
+          </select>
+        </div>
+        <div class="fc-group">
+          <label>Job Role</label>
+          <select class="fc-select" id="fc-role"></select>
+        </div>
+        <div class="fc-group">
+          <label>Years Ahead</label>
+          <select class="fc-select" id="fc-horizon">
+            <option value="1">1 Year</option>
+            <option value="3" selected>3 Years</option>
+            <option value="5">5 Years</option>
+            <option value="10">10 Years</option>
+          </select>
+        </div>
+        <div class="fc-group">
+          <label>Scenario</label>
+          <select class="fc-select" id="fc-scenario">
+            <option value="baseline">Baseline (SARIMA)</option>
+            <option value="ai">AI-Adjusted</option>
+          </select>
+        </div>
+      </div>
+      <button class="fc-btn" onclick="fcGenerate()">▶ Generate Forecast</button>
+    </div>
+
+    <div class="fc-output" id="fc-output">
+      <div class="fc-header">
+        <h3 id="fc-out-title">Workforce Forecast</h3>
+        <div class="fc-meta" id="fc-out-meta"></div>
+      </div>
+      <div class="fc-kpi-row" id="fc-kpis"></div>
+      <div class="fc-warning">⚠️ <strong>California sector-level trends only:</strong> This tool surfaces skills intelligence based on California state industry data from the CA EDD and O*NET — it does not forecast company-specific headcount, and projections do not reflect national or global trends. Use these signals to inform hiring priorities and reskilling investments within California.</div>
+      <div class="fc-reco" id="fc-reco"></div>
+      <div class="fc-charts">
+        <div class="fc-chart-card">
+          <h4 id="fc-skill-title">Skill Demand Profile</h4>
+          <canvas id="fc-skill-canvas" height="200"></canvas>
+        </div>
+        <div class="fc-chart-card">
+          <h4>Sector comparison: SARIMA baseline vs AI-adjusted (2023–2033)</h4>
+          <canvas id="fc-sector-canvas" height="200"></canvas>
+        </div>
+      </div>
+      <div class="fc-model-note">
+        Model: ARIMA(1,1,1) on CA EDD monthly employment data (1990–2025) ·
+        AI exposure: O*NET macro skill weights × occupation skill shares (α=0.10) ·
+        IO Matrix: CA 2023–2033 occupation projections · Shift-share decomposition (Scale + Mix effects) · California-scoped analysis
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE: Scenario Simulator -->
+  <div class="page active" id="page-simulator">
+    <div class="page-eyebrow">Decision Tools</div>
+    <h1 class="page-title">Scenario Simulator</h1>
+    <p class="page-desc">Employment-weighted macro skill shares by sector. Drag the adoption scenario to see how skill demand shifts as AI scales across California's physical-economy workforce.</p>
+
+    <div class="controls-bar">
+      <div class="ctrl-grp">
+        <span class="ctrl-lbl">Sector</span>
+        <div class="btn-row" id="sectorBtns">
+          <button class="s-btn active" data-s="Agriculture">Agriculture</button>
+          <button class="s-btn" data-s="Construction">Construction</button>
+          <button class="s-btn" data-s="Transportation">Transportation</button>
+          <button class="s-btn" data-s="Energy">Energy</button>
+        </div>
+      </div>
+      <div class="ctrl-grp">
+        <span class="ctrl-lbl">AI Adoption Scenario</span>
+        <div class="btn-row">
+          <button class="s-btn active" id="btnBaseline" onclick="setScen(0)">Baseline</button>
+          <button class="s-btn" id="btnHigh" onclick="setScen(1)" style="border-color:#8B2020;color:#8B2020">High adoption</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="metrics-row" id="metrics"></div>
+
+    <div class="two-col">
+      <div class="panel">
+        <p class="panel-title" id="barsHead">Skill demand — Agriculture · Baseline</p>
+        <div id="skillBars"></div>
+        <div class="key-box" id="keyBox"></div>
+      </div>
+      <div class="panel">
+        <p class="panel-title">All-sector comparison at current scenario</p>
+        <div class="cmp-grid" id="cmpGrid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE: Workforce Explorer -->
+  <div class="page" id="page-explorer">
+    <div class="page-eyebrow">Decision Tools</div>
+    <h1 class="page-title">Workforce Explorer</h1>
+    <p class="page-desc">California's major occupations plotted by AI exposure and median wage. Bubble size reflects employment. Filter by wage tier or search by occupation name.</p>
+
+    <div class="filter-bar">
+      <div class="view-toggle">
+        <button class="v-btn active" id="btnAll">All occupations</button>
+        <button class="v-btn" id="btnSec">By sector</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap" id="wageRow">
+        <span class="filter-lbl">Wage:</span>
+        <button class="f-btn active" data-w="all">All</button>
+        <button class="f-btn" data-w="High">High &gt;$90k</button>
+        <button class="f-btn" data-w="Mid-high">Mid-high</button>
+        <button class="f-btn" data-w="Mid-low">Mid-low</button>
+        <button class="f-btn" data-w="Low">Low &lt;$43k</button>
+      </div>
+      <input class="search-input" id="search" type="text" placeholder="Search occupation…">
+    </div>
+
+    <div id="viewAll">
+      <div class="two-col">
+        <div class="chart-panel">
+          <p class="chart-panel-title">AI exposure vs. median wage</p>
+          <div class="legend-row">
+            <span class="leg-item"><span class="leg-dot" style="background:#1A4B7A"></span>High wage</span>
+            <span class="leg-item"><span class="leg-dot" style="background:#1D6B52"></span>Mid-high</span>
+            <span class="leg-item"><span class="leg-dot" style="background:#8A5A00"></span>Mid-low</span>
+            <span class="leg-item"><span class="leg-dot" style="background:#8B2020"></span>Low wage</span>
+            <span style="font-size:11px;color:var(--muted)">· size = employment</span>
+          </div>
+          <div class="chart-outer" id="wo1">
+            <canvas id="c01"></canvas>
+            <div class="tip" id="tp1"><strong id="tp1t"></strong><span id="tp1b"></span></div>
+          </div>
+          <div class="axis-lbl">AI exposure — computers skill share (%)</div>
+          <div class="detail-box"><div class="dt" id="dt1" style="color:var(--muted)">Hover a bubble to inspect</div><div class="dm" id="dm1"></div></div>
+        </div>
+        <div class="chart-panel">
+          <p class="chart-panel-title">Machinery / physical automation risk vs. median wage</p>
+          <div class="legend-row"><span style="font-size:11px;color:var(--muted)">Higher X = greater exposure to robotics and physical automation</span></div>
+          <div class="chart-outer" id="wo2">
+            <canvas id="c02"></canvas>
+            <div class="tip" id="tp2"><strong id="tp2t"></strong><span id="tp2b"></span></div>
+          </div>
+          <div class="axis-lbl">Machinery / physical automation risk (%)</div>
+          <div class="detail-box"><div class="dt" id="dt2" style="color:var(--muted)">Hover a bubble to inspect</div><div class="dm" id="dm2"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="viewSec" style="display:none">
+      <div class="sec-grid4" id="secGrid"></div>
+    </div>
+  </div>
+
+  <!-- PAGE: Geographic Map -->
+  <div class="page" id="page-geo">
+    <div class="page-eyebrow">Decision Tools</div>
+    <h1 class="page-title">Geographic Map</h1>
+    <p class="page-desc">Sector employment concentration and displacement pressure across California's 25 metropolitan areas. Toggle between views; click any metro to inspect its breakdown.</p>
+
+    <div class="controls-bar" style="margin-bottom:18px">
+      <div class="ctrl-grp">
+        <span class="ctrl-lbl">Mode</span>
+        <div class="btn-row">
+          <button class="s-btn active" id="mEmp">Sector employment</button>
+          <button class="s-btn" id="mRisk">Displacement pressure</button>
+        </div>
+      </div>
+      <div class="ctrl-grp" id="secBtnsCont">
+        <span class="ctrl-lbl">Sector</span>
+        <div class="btn-row" id="secBtns">
+          <button class="s-btn active" data-sec="Agriculture">Agriculture</button>
+          <button class="s-btn" data-sec="Construction">Construction</button>
+          <button class="s-btn" data-sec="Transportation">Transportation</button>
+          <button class="s-btn" data-sec="Energy">Energy</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="map-layout">
+      <div class="map-card">
+        <p class="map-card-title" id="mapHead">Sector employment — Agriculture</p>
+        <div class="map-bg">
+          <canvas id="mapC" style="width:100%;display:block"></canvas>
+          <div class="map-tip" id="mapTip"><strong id="tipN"></strong><span id="tipB"></span></div>
+        </div>
+        <div class="legend-row" id="mapLeg" style="margin-top:10px"></div>
+      </div>
+      <div class="map-card">
+        <p class="map-card-title" id="rankHead">Agriculture employment by MSA</p>
+        <div class="rank-scroll" id="rankList"></div>
+        <div class="detail-panel">
+          <div class="det-title" id="detTitle" style="color:var(--muted)">Click an MSA to inspect</div>
+          <div class="stacked" id="stackBar"></div>
+          <div class="stacked-labels"><span id="sl1"></span><span id="sl2"></span><span id="sl3"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>Source: BLS OEWS May 2024 · ONET Macro Skills · California MSA-level analysis · © 2026</footer>
+</div><!-- /main -->
+
+<script>
+// ── Navigation ──────────────────────────────────────────────────────────────
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  if (id === 'explorer') { setTimeout(buildAll, 60); }
+  if (id === 'geo')      { setTimeout(drawMap, 60); }
+  if (id === 'simulator') render();
+}
+
+// ── SIMULATOR DATA ───────────────────────────────────────────────────────────
+const BASE = {
+  Agriculture:    {emp:200400,  Communication:0.3467,Computers:0.1369,Information:0.2021,Machinery:0.1274,Management:0.1870},
+  Construction:   {emp:625920,  Communication:0.3572,Computers:0.1243,Information:0.2056,Machinery:0.1147,Management:0.1981},
+  Transportation: {emp:1357700, Communication:0.3623,Computers:0.1211,Information:0.2109,Machinery:0.1122,Management:0.1935},
+  Energy:         {emp:40960,   Communication:0.3405,Computers:0.1346,Information:0.2101,Machinery:0.1223,Management:0.1924},
+};
+const SCENARIOS=['Baseline','High adoption'];
+const SC_PARAMS=[[0,0],[0.45,0.38]];
+const SC_COLS=['#6B6B6B','#8B2020'];
+const SKILLS=['Communication','Computers','Information','Machinery','Management'];
+const SKILL_COLS={Communication:'#1A4B7A',Computers:'#1D6B52',Information:'#8A5A00',Machinery:'#8B2020',Management:'#534AB7'};
+const SEC_COLS={Agriculture:'#1D6B52',Construction:'#8A5A00',Transportation:'#1A4B7A',Energy:'#8B2020'};
+const SECTORS=['Agriculture','Construction','Transportation','Energy'];
+let activeSec='Agriculture', activeScen=0;
+
+function applyScen(base,cr,mr){
+  const r={...base};
+  const lost=r.Computers*cr+r.Machinery*mr;
+  const hum=['Communication','Information','Management'];
+  const hs=hum.reduce((s,k)=>s+r[k],0);
+  r.Computers-=r.Computers*cr; r.Machinery-=r.Machinery*mr;
+  hum.forEach(k=>r[k]+=lost*(r[k]/hs));
+  return r;
+}
+function getScen(sec,idx){ const [cr,mr]=SC_PARAMS[idx]; return applyScen(BASE[sec],cr,mr); }
+
+function render(){
+  const base=BASE[activeSec], cur=getScen(activeSec,activeScen);
+  document.getElementById('metrics').innerHTML=`
+    <div class="metric"><div class="metric-lbl">Sector</div><div class="metric-val" style="font-size:17px;padding-top:5px">${activeSec}</div><div class="metric-sub">${(base.emp/1000).toFixed(0)}k workers</div></div>
+    <div class="metric"><div class="metric-lbl">Scenario</div><div class="metric-val" style="font-size:13px;padding-top:8px;color:${SC_COLS[activeScen]}">${SCENARIOS[activeScen]}</div><div class="metric-sub">AI adoption level</div></div>
+    <div class="metric"><div class="metric-lbl">Communication share</div><div class="metric-val" style="color:#1A4B7A">${(cur.Communication*100).toFixed(1)}%</div><div class="metric-sub">${activeScen>0?'was '+(base.Communication*100).toFixed(1)+'%':'baseline'}</div></div>
+    <div class="metric"><div class="metric-lbl">Machinery share</div><div class="metric-val" style="color:#8B2020">${(cur.Machinery*100).toFixed(1)}%</div><div class="metric-sub">${activeScen>0?'was '+(base.Machinery*100).toFixed(1)+'%':'baseline'}</div></div>
+  `;
+  document.getElementById('barsHead').textContent=`Skill demand — ${activeSec} · ${SCENARIOS[activeScen]}`;
+  const el=document.getElementById('skillBars'); el.innerHTML='';
+  SKILLS.forEach(sk=>{
+    const bv=base[sk],cv=cur[sk],d=cv-bv;
+    const sign=d>0.001?'+':'';
+    const pc=d>0.001?'pill-up':d<-0.001?'pill-dn':'pill-flat';
+    const col=SKILL_COLS[sk];
+    el.innerHTML+=`<div class="skill-row">
+      <div class="skill-hdr"><span class="skill-name">${sk}</span>
+        <div class="skill-right"><span class="skill-val" style="color:${col}">${(cv*100).toFixed(1)}%</span><span class="pill ${pc}">${sign}${(d*100).toFixed(1)}pp</span></div>
+      </div>
+      <div class="bar-track"><div class="bar-base" style="width:${(bv/0.48*100).toFixed(1)}%;background:${col}"></div><div class="bar-fill" style="width:${(cv/0.48*100).toFixed(1)}%;background:${col}"></div></div>
+    </div>`;
+  });
+  const cd=((cur.Communication-base.Communication)*100).toFixed(1);
+  const md=((cur.Machinery-base.Machinery)*100).toFixed(1);
+  document.getElementById('keyBox').innerHTML=activeScen===0
+    ?`<strong>Baseline:</strong> Communication dominates at ${(base.Communication*100).toFixed(1)}% of skill demand. Machinery exposure is ${(base.Machinery*100).toFixed(1)}%.`
+    :`<strong>High adoption:</strong> Communication grows +${cd}pp. Machinery shrinks ${md}pp. The shift toward human coordination is dramatic across all skills.`;
+  const cg=document.getElementById('cmpGrid'); cg.innerHTML='';
+  SECTORS.forEach(sec=>{
+    const d=getScen(sec,activeScen),col=SEC_COLS[sec];
+    let inner=`<div class="cmp-head" style="color:${col}">${sec}</div>`;
+    SKILLS.forEach(sk=>{
+      inner+=`<div class="cmp-sk"><span class="cmp-sk-n">${sk.slice(0,4)}</span><span class="cmp-sk-v" style="color:${SKILL_COLS[sk]}">${(d[sk]*100).toFixed(1)}%</span></div>
+      <div class="mini-bar"><div class="mini-fill" style="width:${(d[sk]/0.48*100).toFixed(0)}%;background:${SKILL_COLS[sk]}"></div></div>`;
+    });
+    cg.innerHTML+=`<div class="cmp-cell">${inner}</div>`;
+  });
+}
+
+document.getElementById('sectorBtns').addEventListener('click',e=>{
+  if(!e.target.dataset.s)return;
+  activeSec=e.target.dataset.s;
+  document.querySelectorAll('#sectorBtns .s-btn').forEach(b=>b.classList.toggle('active',b.dataset.s===activeSec));
+  render();
+});
+function setScen(idx){
+  activeScen=idx;
+  document.getElementById('btnBaseline').classList.toggle('active',idx===0);
+  const bh=document.getElementById('btnHigh');
+  bh.classList.toggle('active-high',idx===1);
+  bh.classList.toggle('active',false);
+  if(idx===1){bh.style.background='var(--red)';bh.style.color='#fff';bh.style.borderColor='var(--red)';}
+  else{bh.style.background='';bh.style.color='var(--red)';bh.style.borderColor='var(--red)';}
+  render();
+}
+render();
+
+// ── EXPLORER DATA ─────────────────────────────────────────────────────────────
+const D=[{"t":"Fast Food and Counter Workers","e":430450,"w":36780,"c":0.1168,"m":0.0906,"b":"Low"},{"t":"Laborers and Freight, Stock, and Material Movers, Hand","e":363120,"w":39200,"c":0.1155,"m":0.1169,"b":"Low"},{"t":"Cashiers","e":338660,"w":35960,"c":0.116,"m":0.069,"b":"Low"},{"t":"Retail Salespersons","e":338560,"w":36280,"c":0.1228,"m":0.0659,"b":"Low"},{"t":"Registered Nurses","e":316600,"w":133455,"c":0.1233,"m":0.0538,"b":"High"},{"t":"Office Clerks, General","e":293500,"w":47180,"c":0.1133,"m":0.0612,"b":"Low"},{"t":"General and Operations Managers","e":273060,"w":104790,"c":0.1206,"m":0.0542,"b":"High"},{"t":"Software Developers","e":264410,"w":134570,"c":0.216,"m":0.0768,"b":"High"},{"t":"Stockers and Order Fillers","e":258950,"w":38760,"c":0.145,"m":0.0808,"b":"Low"},{"t":"Waiters and Waitresses","e":237840,"w":34340,"c":0.1095,"m":0.0731,"b":"Low"},{"t":"Heavy and Tractor-Trailer Truck Drivers","e":203920,"w":59110,"c":0.1094,"m":0.1429,"b":"Mid-low"},{"t":"Security Guards","e":180330,"w":40900,"c":0.1054,"m":0.0776,"b":"Low"},{"t":"Farmworkers and Laborers, Crop, Nursery, and Greenhouse","e":172290,"w":36720,"c":0.1392,"m":0.1298,"b":"Low"},{"t":"Customer Service Representatives","e":168960,"w":46130,"c":0.1332,"m":0.0473,"b":"Low"},{"t":"Accountants and Auditors","e":161800,"w":83070,"c":0.1429,"m":0.0431,"b":"Mid-high"},{"t":"Business Operations Specialists, All Other","e":156680,"w":80220,"c":0.1473,"m":0.0538,"b":"Mid-high"},{"t":"Cooks, Restaurant","e":156580,"w":39300,"c":0.1184,"m":0.0676,"b":"Low"},{"t":"Management Analysts","e":126720,"w":93760,"c":0.1501,"m":0.0436,"b":"Mid-high"},{"t":"Carpenters","e":102990,"w":72230,"c":0.1292,"m":0.104,"b":"Mid-high"},{"t":"Industrial Truck and Tractor Operators","e":99900,"w":46570,"c":0.1214,"m":0.1495,"b":"Low"},{"t":"Managers, All Other","e":96490,"w":143430,"c":0.1355,"m":0.0581,"b":"High"},{"t":"Computer and Information Systems Managers","e":91160,"w":163890,"c":0.1631,"m":0.0713,"b":"High"},{"t":"Financial Managers","e":90750,"w":152090,"c":0.1344,"m":0.042,"b":"High"},{"t":"Lawyers","e":90140,"w":166350,"c":0.1227,"m":0.0385,"b":"High"},{"t":"Construction Laborers","e":81440,"w":58390,"c":0.1153,"m":0.125,"b":"Mid-low"},{"t":"Computer Occupations, All Other","e":78440,"w":98920,"c":0.1721,"m":0.0619,"b":"Mid-high"},{"t":"Electricians","e":68810,"w":75580,"c":0.1275,"m":0.1458,"b":"Mid-high"},{"t":"Automotive Service Technicians","e":60260,"w":61280,"c":0.1377,"m":0.1514,"b":"Mid-low"},{"t":"Civil Engineers","e":52250,"w":109250,"c":0.1627,"m":0.0591,"b":"High"},{"t":"Marketing Managers","e":51270,"w":143090,"c":0.1392,"m":0.0405,"b":"High"},{"t":"Computer Systems Analysts","e":49760,"w":109100,"c":0.1792,"m":0.0757,"b":"High"},{"t":"Maintenance and Repair Workers","e":125940,"w":51640,"c":0.1294,"m":0.1645,"b":"Mid-low"},{"t":"Packers and Packagers, Hand","e":82780,"w":36210,"c":0.1279,"m":0.0914,"b":"Low"}];
+const S2={Agriculture:[{"t":"Farm Supervisors","e":10050,"w":58845,"c":0.1286},{"t":"Ag Inspectors","e":1700,"w":63490,"c":0.1385},{"t":"Graders and Sorters","e":6390,"w":36680,"c":0.1203},{"t":"Ag Equipment Operators","e":7100,"w":39555,"c":0.1173},{"t":"Farmworkers, Crop/Nursery","e":172290,"w":36720,"c":0.1392},{"t":"Forest Workers","e":870,"w":43680,"c":0.1215}],Construction:[{"t":"Construction Supervisors","e":69710,"w":91090,"c":0.1234},{"t":"Carpenters","e":102990,"w":72230,"c":0.1292},{"t":"Construction Laborers","e":81440,"w":58390,"c":0.1153},{"t":"Electricians","e":68810,"w":75580,"c":0.1275},{"t":"Plumbers and Pipefitters","e":44300,"w":63245,"c":0.1413},{"t":"Painters","e":36870,"w":55820,"c":0.1178},{"t":"Operating Engineers","e":33590,"w":79410,"c":0.117},{"t":"Cement Masons","e":28290,"w":62390,"c":0.1222},{"t":"Solar PV Installers","e":7820,"w":61255,"c":0.139},{"t":"Elevator Installers","e":2370,"w":138305,"c":0.1329}],Transportation:[{"t":"Airline Pilots","e":9610,"w":200690,"c":0.1214},{"t":"Heavy Truck Drivers","e":203920,"w":59110,"c":0.1094},{"t":"Light Truck Drivers","e":113830,"w":44400,"c":0.1118},{"t":"Industrial Truck Operators","e":99900,"w":46570,"c":0.1214},{"t":"Stockers and Order Fillers","e":258950,"w":38760,"c":0.145},{"t":"Laborers and Freight","e":363120,"w":39200,"c":0.1155},{"t":"Air Traffic Controllers","e":1470,"w":179080,"c":0.1304},{"t":"Flight Attendants","e":15250,"w":77870,"c":0.115}],Energy:[{"t":"Chemical Engineers","e":1120,"w":135610,"c":0.1784},{"t":"Petroleum Engineers","e":970,"w":151240,"c":0.1525},{"t":"Environmental Engineers","e":4490,"w":124180,"c":0.1285},{"t":"Power-Line Installers","e":9900,"w":127405,"c":0.1362},{"t":"Solar PV Installers","e":7820,"w":61255,"c":0.139},{"t":"Power Plant Operators","e":1720,"w":105520,"c":0.1378},{"t":"Stationary Engineers","e":7410,"w":80530,"c":0.1213},{"t":"Wind Turbine Techs","e":130,"w":83645,"c":0.1339}]};
+const WC={'High':'#1A4B7A','Mid-high':'#1D6B52','Mid-low':'#8A5A00','Low':'#8B2020'};
+const WA={'High':'rgba(26,75,122,.6)','Mid-high':'rgba(29,107,82,.6)','Mid-low':'rgba(138,90,0,.6)','Low':'rgba(139,32,32,.6)'};
+const SC2={Agriculture:'#1D6B52',Construction:'#8A5A00',Transportation:'#1A4B7A',Energy:'#8B2020'};
+const SA={Agriculture:'rgba(29,107,82,.65)',Construction:'rgba(138,90,0,.65)',Transportation:'rgba(26,75,122,.65)',Energy:'rgba(139,32,32,.65)'};
+let aWage='all',aSearch='',charts2={};
+
+function filt(){return D.filter(d=>(aWage==='all'||d.b===aWage)&&(!aSearch||d.t.toLowerCase().includes(aSearch.toLowerCase())));}
+
+function bubble(cid,wid,tpId,tpTId,tpBId,xk,dtId,dmId){
+  const cvs=document.getElementById(cid),wrap=document.getElementById(wid);
+  const dpr=window.devicePixelRatio||1,W=wrap.clientWidth,H=320;
+  cvs.width=W*dpr;cvs.height=H*dpr;cvs.style.height=H+'px';
+  const c=cvs.getContext('2d');c.scale(dpr,dpr);
+  const data=filt();if(!data.length){c.clearRect(0,0,W,H);return;}
+  const maxE=Math.max(...data.map(d=>d.e));
+  const P={l:46,r:14,t:12,b:30},CW=W-P.l-P.r,CH=H-P.t-P.b;
+  const xs=data.map(d=>d[xk]*100),ys=data.map(d=>d.w);
+  const x0=Math.min(...xs)-.4,x1=Math.max(...xs)+.4,y0=Math.max(0,Math.min(...ys)-8000),y1=Math.max(...ys)+18000;
+  const px=v=>P.l+(v-x0)/(x1-x0)*CW,py=v=>P.t+(1-(v-y0)/(y1-y0))*CH;
+  c.clearRect(0,0,W,H);
+  c.strokeStyle='rgba(0,0,0,0.04)';c.lineWidth=.5;
+  for(let i=0;i<=5;i++){const v=x0+i*(x1-x0)/5,x=px(v);c.beginPath();c.moveTo(x,P.t);c.lineTo(x,P.t+CH);c.stroke();c.fillStyle='#aaa';c.font='9px IBM Plex Mono,monospace';c.textAlign='center';c.fillText(v.toFixed(1)+'%',x,P.t+CH+14);}
+  for(let i=0;i<=4;i++){const v=y0+i*(y1-y0)/4,y=py(v);c.beginPath();c.moveTo(P.l,y);c.lineTo(P.l+CW,y);c.stroke();c.fillStyle='#aaa';c.font='9px IBM Plex Mono,monospace';c.textAlign='right';c.fillText('$'+Math.round(v/1000)+'k',P.l-4,y+3);}
+  const pts=[];
+  [...data].sort((a,b)=>b.e-a.e).forEach(d=>{
+    const r=Math.max(4,Math.sqrt(d.e/maxE)*36),cx=px(d[xk]*100),cy=py(d.w);
+    c.beginPath();c.arc(cx,cy,r,0,Math.PI*2);c.fillStyle=WA[d.b];c.fill();c.strokeStyle=WC[d.b];c.lineWidth=.8;c.stroke();
+    if(r>20){const s=d.t.split(',')[0].split(' ').slice(0,2).join(' ');c.fillStyle='rgba(255,255,255,.92)';c.font='bold 7.5px IBM Plex Sans,sans-serif';c.textAlign='center';c.textBaseline='middle';c.fillText(s,cx,cy);}
+    pts.push({cx,cy,r,d});
+  });
+  cvs.onmousemove=e=>{
+    const rect=cvs.getBoundingClientRect(),mx=e.clientX-rect.left,my=e.clientY-rect.top;
+    let hit=null;for(let i=pts.length-1;i>=0;i--){const p=pts[i];if(Math.hypot(mx-p.cx,my-p.cy)<=p.r){hit=p;break;}}
+    const tp=document.getElementById(tpId);
+    if(!hit){tp.style.display='none';cvs.style.cursor='default';document.getElementById(dtId).style.color='var(--muted)';document.getElementById(dtId).textContent='Hover a bubble to inspect';document.getElementById(dmId).textContent='';return;}
+    cvs.style.cursor='pointer';tp.style.display='block';
+    document.getElementById(tpTId).textContent=hit.d.t;document.getElementById(tpTId).style.color=WC[hit.d.b];
+    document.getElementById(tpBId).innerHTML=`Employment: ${hit.d.e.toLocaleString()}<br>Median wage: $${Math.round(hit.d.w/1000)}k<br>${xk==='c'?'AI':'Machinery'} exposure: ${(hit.d[xk]*100).toFixed(1)}%`;
+    let lx=e.clientX-rect.left+12,ly=e.clientY-rect.top-10;
+    if(lx+250>W)lx=e.clientX-rect.left-250;
+    tp.style.left=lx+'px';tp.style.top=ly+'px';
+    document.getElementById(dtId).style.color=WC[hit.d.b];document.getElementById(dtId).textContent=hit.d.t;
+    document.getElementById(dmId).textContent=`Employment: ${hit.d.e.toLocaleString()} · Wage: $${Math.round(hit.d.w/1000)}k · ${xk==='c'?'AI':'Machinery'} exposure: ${(hit.d[xk]*100).toFixed(1)}% · Tier: ${hit.d.b}`;
+  };
+  cvs.onmouseleave=()=>{document.getElementById(tpId).style.display='none';cvs.style.cursor='default';document.getElementById(dtId).style.color='var(--muted)';document.getElementById(dtId).textContent='Hover a bubble to inspect';document.getElementById(dmId).textContent='';};
+}
+
+function secBub(cid,wid,pts,col,alpha){
+  const cvs=document.getElementById(cid);if(!cvs)return;
+  const wrap=document.getElementById(wid),dpr=window.devicePixelRatio||1,W=wrap.clientWidth,H=220;
+  cvs.width=W*dpr;cvs.height=H*dpr;cvs.style.height=H+'px';
+  const c=cvs.getContext('2d');c.scale(dpr,dpr);
+  const maxE=Math.max(...pts.map(p=>p.e));
+  const xs=pts.map(p=>p.c*100),ys=pts.map(p=>p.w);
+  const x0=Math.min(...xs)-.3,x1=Math.max(...xs)+.3,y0=Math.max(0,Math.min(...ys)-6000),y1=Math.max(...ys)+12000;
+  const P={l:38,r:10,t:8,b:26},CW=W-P.l-P.r,CH=H-P.t-P.b;
+  const px=v=>P.l+(v-x0)/(x1-x0)*CW,py=v=>P.t+(1-(v-y0)/(y1-y0))*CH;
+  c.clearRect(0,0,W,H);c.strokeStyle='rgba(0,0,0,0.04)';c.lineWidth=.4;
+  [2,3,4].forEach(i=>{const v=x0+i*(x1-x0)/5,x=px(v);c.beginPath();c.moveTo(x,P.t);c.lineTo(x,P.t+CH);c.stroke();c.fillStyle='#bbb';c.font='8px monospace';c.textAlign='center';c.fillText(v.toFixed(1)+'%',x,P.t+CH+14);});
+  [1,2,3].forEach(i=>{const v=y0+i*(y1-y0)/3,y=py(v);c.beginPath();c.moveTo(P.l,y);c.lineTo(P.l+CW,y);c.stroke();c.fillStyle='#bbb';c.font='8px monospace';c.textAlign='right';c.fillText('$'+Math.round(v/1000)+'k',P.l-3,y+3);});
+  const dr=[];
+  [...pts].sort((a,b)=>b.e-a.e).forEach(p=>{
+    const r=Math.max(4,(p.e/maxE)**0.48*26),cx=px(p.c*100),cy=py(p.w);
+    c.beginPath();c.arc(cx,cy,r,0,Math.PI*2);c.fillStyle=alpha;c.fill();c.strokeStyle=col;c.lineWidth=.6;c.stroke();
+    if(r>13){const s=p.t.split(',')[0].split(' ').slice(0,2).join(' ');c.fillStyle='rgba(255,255,255,.9)';c.font='bold 6.5px sans-serif';c.textAlign='center';c.textBaseline='middle';c.fillText(s,cx,cy);}
+    dr.push({cx,cy,r,p});
+  });
+  cvs.onmousemove=e=>{const rect=cvs.getBoundingClientRect(),mx=e.clientX-rect.left,my=e.clientY-rect.top;let hit=null;for(let i=dr.length-1;i>=0;i--){const p=dr[i];if(Math.hypot(mx-p.cx,my-p.cy)<=p.r){hit=p;break;}}cvs.title=hit?`${hit.p.t}\nEmp: ${hit.p.e>0?hit.p.e.toLocaleString():'<500'} · Wage: $${Math.round(hit.p.w/1000)}k · AI: ${(hit.p.c*100).toFixed(1)}%`:'';cvs.style.cursor=hit?'pointer':'default';};
+  cvs.onmouseleave=()=>{cvs.style.cursor='default';};
+}
+
+function buildAll(){
+  bubble('c01','wo1','tp1','tp1t','tp1b','c','dt1','dm1');
+  bubble('c02','wo2','tp2','tp2t','tp2b','m','dt2','dm2');
+}
+function buildSectors(){
+  const el=document.getElementById('secGrid');el.innerHTML='';
+  Object.entries(S2).forEach(([sec,pts])=>{
+    const id='sc_'+sec,wid='scw_'+sec;
+    el.innerHTML+=`<div class="sec-card"><p class="sec-card-head" style="color:${SC2[sec]}">${sec}</p><div id="${wid}" style="width:100%"><canvas id="${id}"></canvas></div><div style="font-size:11px;color:var(--muted);text-align:center;margin-top:3px">AI exposure (%)</div></div>`;
+  });
+  setTimeout(()=>{Object.entries(S2).forEach(([sec,pts])=>secBub('sc_'+sec,'scw_'+sec,pts,SC2[sec],SA[sec]));},60);
+}
+document.getElementById('btnAll').onclick=()=>{document.getElementById('viewAll').style.display='';document.getElementById('viewSec').style.display='none';document.getElementById('btnAll').classList.add('active');document.getElementById('btnSec').classList.remove('active');document.getElementById('wageRow').style.display='flex';document.querySelector('.search-input').style.display='';buildAll();};
+document.getElementById('btnSec').onclick=()=>{document.getElementById('viewAll').style.display='none';document.getElementById('viewSec').style.display='';document.getElementById('btnSec').classList.add('active');document.getElementById('btnAll').classList.remove('active');document.getElementById('wageRow').style.display='none';document.querySelector('.search-input').style.display='none';buildSectors();};
+document.querySelectorAll('.f-btn').forEach(b=>b.addEventListener('click',()=>{aWage=b.dataset.w;document.querySelectorAll('.f-btn').forEach(x=>x.classList.toggle('active',x.dataset.w===aWage));buildAll();}));
+document.getElementById('search').addEventListener('input',e=>{aSearch=e.target.value;buildAll();});
+window.addEventListener('resize',()=>{if(document.getElementById('viewAll').style.display!=='none')buildAll();else buildSectors();});
+
+// ── GEO MAP DATA ──────────────────────────────────────────────────────────────
+const SEC_EMP={Agriculture:[{n:'Salinas',e:30750,c:0.1224,lat:36.68,lng:-121.66},{n:'Bakersfield',e:36930,c:0.1252,lat:35.37,lng:-119.02},{n:'Fresno',e:30810,c:0.1252,lat:36.74,lng:-119.79},{n:'Visalia',e:24160,c:0.1252,lat:36.33,lng:-119.29},{n:'Santa Maria-SB',e:13110,c:0.1225,lat:34.95,lng:-120.44},{n:'Riverside-SB',e:6340,c:0.1247,lat:33.98,lng:-117.37},{n:'Modesto',e:5580,c:0.1252,lat:37.64,lng:-120.99},{n:'Merced',e:4670,c:0.1225,lat:37.30,lng:-120.48},{n:'Napa',e:4550,c:0.1284,lat:38.30,lng:-122.29},{n:'Sacramento',e:4840,c:0.1247,lat:38.58,lng:-121.49},{n:'Oxnard-Ventura',e:5840,c:0.1228,lat:34.27,lng:-119.23},{n:'Los Angeles',e:4260,c:0.1266,lat:34.05,lng:-118.24},{n:'Stockton',e:6100,c:0.1288,lat:37.96,lng:-121.29},{n:'SF Bay',e:1660,c:0.1274,lat:37.77,lng:-122.42},{n:'El Centro',e:3740,c:0.1284,lat:32.79,lng:-115.56},{n:'Hanford',e:3530,c:0.1263,lat:36.33,lng:-119.65},{n:'Santa Rosa',e:3160,c:0.1231,lat:38.44,lng:-122.71},{n:'San Diego',e:2110,c:0.1289,lat:32.72,lng:-117.16},{n:'Chico',e:590,c:0.1294,lat:39.73,lng:-121.84},{n:'Yuba City',e:1160,c:0.1263,lat:39.14,lng:-121.62},{n:'Redding',e:210,c:0.1272,lat:40.59,lng:-122.39},{n:'Vallejo',e:210,c:0.1282,lat:38.10,lng:-122.26},{n:'San Jose',e:1550,c:0.1239,lat:37.34,lng:-121.89}],
+Construction:[{n:'Los Angeles',e:182990,c:0.121,lat:34.05,lng:-118.24},{n:'Riverside-SB',e:82220,c:0.1214,lat:33.98,lng:-117.37},{n:'SF Bay',e:86510,c:0.1213,lat:37.77,lng:-122.42},{n:'Sacramento',e:53700,c:0.1221,lat:38.58,lng:-121.49},{n:'San Diego',e:64270,c:0.1217,lat:32.72,lng:-117.16},{n:'San Jose',e:36750,c:0.1225,lat:37.34,lng:-121.89},{n:'Fresno',e:17010,c:0.1221,lat:36.74,lng:-119.79},{n:'Bakersfield',e:12920,c:0.1201,lat:35.37,lng:-119.02},{n:'Oxnard-Ventura',e:12780,c:0.1227,lat:34.27,lng:-119.23},{n:'Stockton',e:10380,c:0.1224,lat:37.96,lng:-121.29},{n:'Santa Rosa',e:10910,c:0.1238,lat:38.44,lng:-122.71},{n:'Modesto',e:7530,c:0.1223,lat:37.64,lng:-120.99},{n:'Vallejo',e:7280,c:0.1233,lat:38.10,lng:-122.26},{n:'Santa Maria-SB',e:7550,c:0.1236,lat:34.95,lng:-120.44},{n:'Salinas',e:5400,c:0.1248,lat:36.68,lng:-121.66},{n:'Visalia',e:4050,c:0.1229,lat:36.33,lng:-119.29},{n:'Chico',e:2880,c:0.1243,lat:39.73,lng:-121.84},{n:'Redding',e:2920,c:0.1243,lat:40.59,lng:-122.39},{n:'El Centro',e:1270,c:0.1252,lat:32.79,lng:-115.56},{n:'Yuba City',e:1640,c:0.1232,lat:39.14,lng:-121.62}],
+Transportation:[{n:'Los Angeles',e:475300,c:0.12,lat:34.05,lng:-118.24},{n:'Riverside-SB',e:244100,c:0.1191,lat:33.98,lng:-117.37},{n:'SF Bay',e:143690,c:0.1191,lat:37.77,lng:-122.42},{n:'Sacramento',e:73140,c:0.1183,lat:38.58,lng:-121.49},{n:'San Diego',e:93280,c:0.1179,lat:32.72,lng:-117.16},{n:'San Jose',e:46600,c:0.1178,lat:37.34,lng:-121.89},{n:'Stockton',e:53150,c:0.1158,lat:37.96,lng:-121.29},{n:'Fresno',e:41710,c:0.1154,lat:36.74,lng:-119.79},{n:'Bakersfield',e:32610,c:0.1158,lat:35.37,lng:-119.02},{n:'Oxnard-Ventura',e:22300,c:0.1153,lat:34.27,lng:-119.23},{n:'Modesto',e:19530,c:0.1179,lat:37.64,lng:-120.99},{n:'Santa Rosa',e:12020,c:0.12,lat:38.44,lng:-122.71},{n:'Vallejo',e:11330,c:0.1156,lat:38.10,lng:-122.26},{n:'Santa Maria-SB',e:10620,c:0.1184,lat:34.95,lng:-120.44},{n:'Visalia',e:17320,c:0.1179,lat:36.33,lng:-119.29},{n:'Salinas',e:14960,c:0.1189,lat:36.68,lng:-121.66}],
+Energy:[{n:'Los Angeles',e:13210,c:0.1373,lat:34.05,lng:-118.24},{n:'SF Bay',e:6090,c:0.1387,lat:37.77,lng:-122.42},{n:'Riverside-SB',e:4820,c:0.1385,lat:33.98,lng:-117.37},{n:'Sacramento',e:4280,c:0.1401,lat:38.58,lng:-121.49},{n:'San Diego',e:3770,c:0.1385,lat:32.72,lng:-117.16},{n:'Bakersfield',e:1940,c:0.1406,lat:35.37,lng:-119.02},{n:'San Jose',e:1560,c:0.1407,lat:37.34,lng:-121.89},{n:'Vallejo',e:1050,c:0.1328,lat:38.10,lng:-122.26},{n:'Fresno',e:940,c:0.1341,lat:36.74,lng:-119.79},{n:'Stockton',e:280,c:0.1331,lat:37.96,lng:-121.29}]};
+const RISK=[{n:'Salinas',tp:51300,hi:63.1,me:8.9,lo:28.0,he:32370,lat:36.68,lng:-121.66},{n:'Visalia',tp:45630,hi:58.5,me:12.5,lo:29.1,he:26680,lat:36.33,lng:-119.29},{n:'Bakersfield',tp:83950,hi:53.8,me:14.1,lo:32.1,he:45170,lat:35.37,lng:-119.02},{n:'Hanford',tp:7940,hi:49.7,me:15.5,lo:34.8,he:3950,lat:36.33,lng:-119.65},{n:'El Centro',tp:9860,hi:48.5,me:17.1,lo:34.4,he:4780,lat:32.79,lng:-115.56},{n:'Santa Maria-SB',tp:31490,hi:47.7,me:13.3,lo:39.0,he:15010,lat:34.95,lng:-120.44},{n:'Napa',tp:12060,hi:45.5,me:14.9,lo:39.6,he:5490,lat:38.30,lng:-122.29},{n:'Fresno',tp:90210,hi:43.8,me:15.3,lo:41.0,he:39480,lat:36.74,lng:-119.79},{n:'Merced',tp:14660,hi:39.6,me:17.8,lo:42.6,he:5810,lat:37.30,lng:-120.48},{n:'San Luis Obispo',tp:15990,hi:38.5,me:16.5,lo:45.0,he:6150,lat:35.28,lng:-120.66},{n:'Modesto',tp:32760,hi:31.4,me:17.6,lo:51.0,he:10280,lat:37.64,lng:-120.99},{n:'Oxnard-Ventura',tp:41510,hi:27.0,me:15.7,lo:57.3,he:11190,lat:34.27,lng:-119.23},{n:'Stockton',tp:69910,hi:26.0,me:19.3,lo:54.7,he:18170,lat:37.96,lng:-121.29},{n:'Santa Rosa',tp:26420,hi:25.9,me:16.1,lo:58.1,he:6830,lat:38.44,lng:-122.71},{n:'Riverside-SB',tp:336360,hi:20.3,me:18.4,lo:61.3,he:68270,lat:33.98,lng:-117.37},{n:'Sacramento',tp:135140,hi:19.1,me:17.7,lo:63.3,he:25760,lat:38.58,lng:-121.49},{n:'San Jose',tp:86020,hi:17.6,me:15.3,lo:67.2,he:15110,lat:37.34,lng:-121.89},{n:'San Diego',tp:162400,hi:16.9,me:15.4,lo:67.7,he:27480,lat:32.72,lng:-117.16},{n:'SF Bay',tp:236760,hi:16.6,me:16.5,lo:67.0,he:39270,lat:37.77,lng:-122.42},{n:'Los Angeles',tp:673490,hi:14.4,me:16.1,lo:69.5,he:97080,lat:34.05,lng:-118.24}];
+
+const SC3={Agriculture:'#1D6B52',Construction:'#8A5A00',Transportation:'#1A4B7A',Energy:'#8B2020'};
+function rCol(p){return p>=40?'#8B2020':p>=20?'#C0392B':'#E8A89A';}
+function rAlpha(p,a){return p>=40?`rgba(139,32,32,${a})`:p>=20?`rgba(192,57,43,${a})`:`rgba(232,168,154,${a})`;}
+
+const LAT_MIN=32.4,LAT_MAX=41.0,LNG_MIN=-124.5,LNG_MAX=-114.1;
+function proj(lat,lng,W,H){return[(lng-LNG_MIN)/(LNG_MAX-LNG_MIN)*W,(1-(lat-LAT_MIN)/(LAT_MAX-LAT_MIN))*H];}
+
+let gMode='emp',gSec='Agriculture',gSel=null;
+const mapCvs=document.getElementById('mapC'),mapCtx=mapCvs.getContext('2d');
+let gDrawn=[];
+
+function drawMap(){
+  const dpr=window.devicePixelRatio||1,W=mapCvs.parentElement.clientWidth,H=Math.round(W*1.22);
+  mapCvs.width=W*dpr;mapCvs.height=H*dpr;mapCvs.style.height=H+'px';
+  mapCtx.scale(dpr,dpr);mapCtx.clearRect(0,0,W,H);gDrawn=[];
+  if(gMode==='emp'){
+    const data=SEC_EMP[gSec],maxE=Math.max(...data.map(d=>d.e)),col=SC3[gSec];
+    [...data].sort((a,b)=>b.e-a.e).forEach(d=>{
+      const [x,y]=proj(d.lat,d.lng,W,H),r=Math.max(5,(d.e/maxE)**0.45*44),sel=gSel&&gSel.n===d.n;
+      mapCtx.beginPath();mapCtx.arc(x,y,r,0,Math.PI*2);
+      mapCtx.fillStyle=col+(sel?'EE':'99');mapCtx.fill();
+      mapCtx.strokeStyle=col;mapCtx.lineWidth=sel?2:.6;mapCtx.stroke();
+      if(r>14){mapCtx.fillStyle='rgba(255,255,255,.92)';mapCtx.font='500 9px IBM Plex Sans,sans-serif';mapCtx.textAlign='center';mapCtx.textBaseline='middle';mapCtx.fillText(d.n.split('-')[0].split(',')[0],x,y);}
+      gDrawn.push({x,y,r,d});
+    });
+  } else {
+    const maxE=Math.max(...RISK.map(d=>d.he));
+    [...RISK].sort((a,b)=>b.he-a.he).forEach(d=>{
+      const [x,y]=proj(d.lat,d.lng,W,H),r=Math.max(6,(d.he/maxE)**0.45*46),sel=gSel&&gSel.n===d.n;
+      mapCtx.beginPath();mapCtx.arc(x,y,r,0,Math.PI*2);
+      mapCtx.fillStyle=rAlpha(d.hi,sel?.9:.7);mapCtx.fill();
+      mapCtx.strokeStyle=rCol(d.hi);mapCtx.lineWidth=sel?2:.7;mapCtx.stroke();
+      if(r>16){mapCtx.fillStyle='rgba(255,255,255,.92)';mapCtx.font='500 9px IBM Plex Sans,sans-serif';mapCtx.textAlign='center';mapCtx.textBaseline='middle';mapCtx.fillText(d.n.split('-')[0],x,y);}
+      gDrawn.push({x,y,r,d});
+    });
+  }
+}
+mapCvs.addEventListener('mousemove',e=>{
+  const rect=mapCvs.getBoundingClientRect(),mx=e.clientX-rect.left,my=e.clientY-rect.top;
+  let hit=null;for(let i=gDrawn.length-1;i>=0;i--){const c=gDrawn[i];if(Math.hypot(mx-c.x,my-c.y)<=c.r){hit=c;break;}}
+  const tip=document.getElementById('mapTip');
+  if(!hit){tip.style.display='none';mapCvs.style.cursor='default';return;}
+  mapCvs.style.cursor='pointer';tip.style.display='block';
+  document.getElementById('tipN').textContent=hit.d.n;
+  document.getElementById('tipB').innerHTML=gMode==='emp'?`Employment: ${hit.d.e.toLocaleString()}<br>AI exposure: ${(hit.d.c*100).toFixed(1)}%`:`At-risk workers: ${hit.d.he.toLocaleString()}<br>Displacement share: ${hit.d.hi}%`;
+  let lx=e.clientX-rect.left+12,ly=e.clientY-rect.top-10;
+  if(lx+210>mapCvs.clientWidth)lx=e.clientX-rect.left-210;
+  tip.style.left=lx+'px';tip.style.top=ly+'px';
+});
+mapCvs.addEventListener('mouseleave',()=>{document.getElementById('mapTip').style.display='none';});
+mapCvs.addEventListener('click',e=>{
+  const rect=mapCvs.getBoundingClientRect(),mx=e.clientX-rect.left,my=e.clientY-rect.top;
+  for(let i=gDrawn.length-1;i>=0;i--){const c=gDrawn[i];if(Math.hypot(mx-c.x,my-c.y)<=c.r){gSel=c.d;updateDetail(c.d);buildRank();drawMap();return;}}
+});
+
+function updateDetail(d){
+  if(!d){document.getElementById('detTitle').textContent='Click an MSA to inspect';document.getElementById('detTitle').style.color='var(--muted)';document.getElementById('stackBar').innerHTML='';document.getElementById('sl1').textContent='';document.getElementById('sl2').textContent='';document.getElementById('sl3').textContent='';return;}
+  if(gMode==='emp'){
+    const col=SC3[gSec];
+    document.getElementById('detTitle').textContent=d.n+' — '+gSec;document.getElementById('detTitle').style.color=col;
+    document.getElementById('stackBar').innerHTML=`<div style="width:100%;height:13px;background:${col};border-radius:4px"></div>`;
+    document.getElementById('sl1').textContent=d.e.toLocaleString()+' workers';document.getElementById('sl2').textContent=`AI: ${(d.c*100).toFixed(1)}%`;document.getElementById('sl3').textContent='';
+  } else {
+    const rd=RISK.find(r=>r.n===d.n)||d;
+    document.getElementById('detTitle').textContent=d.n+' — displacement';document.getElementById('detTitle').style.color=rCol(rd.hi);
+    document.getElementById('stackBar').innerHTML=`<div style="width:${rd.hi}%;background:#8B2020;height:100%"></div><div style="width:${rd.me}%;background:#E8A04A;height:100%"></div><div style="width:${rd.lo}%;background:#1D6B52;height:100%"></div>`;
+    document.getElementById('sl1').textContent=`High ${rd.hi}%`;document.getElementById('sl2').textContent=`Mid ${rd.me}%`;document.getElementById('sl3').textContent=`Low ${rd.lo}%`;
+  }
+}
+
+function buildRank(){
+  const el=document.getElementById('rankList');el.innerHTML='';
+  if(gMode==='emp'){
+    const data=[...SEC_EMP[gSec]].sort((a,b)=>b.e-a.e),maxE=Math.max(...data.map(d=>d.e)),col=SC3[gSec];
+    data.forEach(d=>{
+      const row=document.createElement('div');row.className='rank-row'+(gSel&&gSel.n===d.n?' sel':'');
+      row.innerHTML=`<span class="rank-name">${d.n}</span><div class="rank-track"><div class="rank-bar" style="width:${(d.e/maxE*100).toFixed(0)}%;background:${col}"></div></div><span class="rank-val">${(d.e/1000).toFixed(0)}k</span>`;
+      row.onclick=()=>{gSel=d;updateDetail(d);buildRank();drawMap();};el.appendChild(row);
+    });
+  } else {
+    RISK.forEach(d=>{
+      const col=rCol(d.hi);const row=document.createElement('div');row.className='rank-row'+(gSel&&gSel.n===d.n?' sel':'');
+      row.innerHTML=`<span class="rank-name">${d.n}</span><div class="rank-track"><div class="rank-bar" style="width:${d.hi}%;background:${col}"></div></div><span class="rank-val">${d.hi}%</span>`;
+      row.onclick=()=>{gSel=d;updateDetail(d);buildRank();drawMap();};el.appendChild(row);
+    });
+  }
+}
+function updateLeg(){
+  const el=document.getElementById('mapLeg');
+  if(gMode==='emp') el.innerHTML=`<span class="leg-item"><span class="leg-sq" style="background:${SC3[gSec]};opacity:.6"></span>Employment (size = workers)</span>`;
+  else el.innerHTML=`<span class="leg-item"><span class="leg-sq" style="background:#8B2020"></span>>40% high risk</span><span class="leg-item"><span class="leg-sq" style="background:#C0392B"></span>20–40% mid</span><span class="leg-item"><span class="leg-sq" style="background:#E8A89A"></span><20% lower</span>`;
+}
+function setGeoMode(m){
+  gMode=m;gSel=null;
+  document.getElementById('mEmp').classList.toggle('active',m==='emp');
+  document.getElementById('mRisk').classList.toggle('active',m==='risk');
+  document.getElementById('secBtnsCont').style.visibility=m==='emp'?'visible':'hidden';
+  document.getElementById('mapHead').textContent=m==='emp'?`Sector employment — ${gSec}`:'Displacement pressure — all sectors';
+  document.getElementById('rankHead').textContent=m==='emp'?`${gSec} employment by MSA`:'MSA ranking by displacement share';
+  updateLeg();buildRank();updateDetail(null);drawMap();
+}
+document.getElementById('mEmp').onclick=()=>setGeoMode('emp');
+document.getElementById('mRisk').onclick=()=>setGeoMode('risk');
+document.getElementById('secBtns').addEventListener('click',e=>{
+  if(!e.target.dataset.sec)return;
+  gSec=e.target.dataset.sec;gSel=null;
+  document.querySelectorAll('#secBtns .s-btn').forEach(b=>b.classList.toggle('active',b.dataset.sec===gSec));
+  document.getElementById('mapHead').textContent=`Sector employment — ${gSec}`;
+  document.getElementById('rankHead').textContent=`${gSec} employment by MSA`;
+  updateLeg();buildRank();updateDetail(null);drawMap();
+});
+setGeoMode('emp');
+window.addEventListener('resize',()=>{if(document.getElementById('page-geo').classList.contains('active'))drawMap();if(document.getElementById('page-explorer').classList.contains('active'))buildAll();});
+
+// ── FORECASTER ───────────────────────────────────────────────────────────────
+const FC_PANEL={
+  Agriculture:    {sarima:14400.0,ai_effect:12140.9,ai_total:26541.0,emp2023:410000},
+  Construction:   {sarima:-17566.4,ai_effect:28319.2,ai_total:10752.8,emp2023:883600},
+  Energy:         {sarima:1200.0,ai_effect:1682.7,ai_total:2882.7,emp2023:240000},
+  Transportation: {sarima:-11237.7,ai_effect:23046.5,ai_total:11808.7,emp2023:1800000},
+};
+const FC_ROLES={
+  Construction:['Electrician','Plumber','Carpenter','Construction Manager','Civil Engineer','Equipment Operator','Welder','HVAC Technician'],
+  Energy:['Solar Panel Installer','Wind Turbine Technician','Electrical Engineer','Power Plant Operator','Energy Auditor','Pipeline Technician'],
+  Transportation:['Truck Driver','Logistics Coordinator','Fleet Manager','Rail Operator','Supply Chain Analyst','Warehouse Supervisor'],
+  Agriculture:['Farm Manager','Agricultural Technician','Irrigation Specialist','Precision Ag Operator','Agricultural Engineer','Crop Scientist'],
+};
+const FC_EXPOSURE={'Electrician':0.2543,'Plumber':0.5612,'Carpenter':0.3041,'Construction Manager':0.3384,'Civil Engineer':1.1226,'Equipment Operator':0.2480,'Welder':0.2971,'HVAC Technician':0.2680,'Solar Panel Installer':0.2863,'Wind Turbine Technician':0.2395,'Electrical Engineer':0.3309,'Power Plant Operator':0.8207,'Energy Auditor':1.4833,'Pipeline Technician':0.2618,'Truck Driver':0.2473,'Logistics Coordinator':1.1591,'Fleet Manager':0.7377,'Rail Operator':0.2809,'Supply Chain Analyst':1.1591,'Warehouse Supervisor':0.6720,'Farm Manager':0.3112,'Agricultural Technician':0.6296,'Irrigation Specialist':0.2281,'Precision Ag Operator':0.2281,'Agricultural Engineer':0.3540,'Crop Scientist':0.3714};
+const FC_WEIGHTS={Computers:1.0,Information:0.6,Management:0.3,Communication:0.2,Machinery:-0.8};
+const FC_SKILLS={'Electrician':{Communication:0.6,Computers:0.5,Information:0.5,Machinery:0.9,Management:0.4},'Plumber':{Communication:0.5,Computers:0.3,Information:0.4,Machinery:0.9,Management:0.3},'Carpenter':{Communication:0.5,Computers:0.3,Information:0.4,Machinery:0.8,Management:0.3},'Construction Manager':{Communication:0.9,Computers:0.7,Information:0.8,Machinery:0.4,Management:1.0},'Civil Engineer':{Communication:0.8,Computers:0.9,Information:0.9,Machinery:0.5,Management:0.8},'Equipment Operator':{Communication:0.4,Computers:0.4,Information:0.3,Machinery:1.0,Management:0.3},'Welder':{Communication:0.4,Computers:0.3,Information:0.3,Machinery:0.9,Management:0.2},'HVAC Technician':{Communication:0.6,Computers:0.6,Information:0.6,Machinery:0.9,Management:0.4},'Solar Panel Installer':{Communication:0.5,Computers:0.6,Information:0.5,Machinery:0.8,Management:0.3},'Wind Turbine Technician':{Communication:0.5,Computers:0.7,Information:0.6,Machinery:0.9,Management:0.3},'Electrical Engineer':{Communication:0.8,Computers:0.9,Information:0.9,Machinery:0.6,Management:0.7},'Power Plant Operator':{Communication:0.6,Computers:0.7,Information:0.7,Machinery:0.9,Management:0.5},'Energy Auditor':{Communication:0.8,Computers:0.8,Information:0.9,Machinery:0.4,Management:0.7},'Pipeline Technician':{Communication:0.5,Computers:0.5,Information:0.5,Machinery:0.9,Management:0.3},'Truck Driver':{Communication:0.5,Computers:0.5,Information:0.4,Machinery:0.9,Management:0.3},'Logistics Coordinator':{Communication:0.9,Computers:0.8,Information:0.9,Machinery:0.3,Management:0.8},'Fleet Manager':{Communication:0.8,Computers:0.8,Information:0.8,Machinery:0.5,Management:1.0},'Rail Operator':{Communication:0.6,Computers:0.6,Information:0.5,Machinery:0.9,Management:0.4},'Supply Chain Analyst':{Communication:0.8,Computers:0.9,Information:1.0,Machinery:0.2,Management:0.8},'Warehouse Supervisor':{Communication:0.7,Computers:0.6,Information:0.7,Machinery:0.6,Management:0.9},'Farm Manager':{Communication:0.7,Computers:0.6,Information:0.7,Machinery:0.7,Management:1.0},'Agricultural Technician':{Communication:0.5,Computers:0.6,Information:0.6,Machinery:0.8,Management:0.4},'Irrigation Specialist':{Communication:0.5,Computers:0.6,Information:0.6,Machinery:0.8,Management:0.4},'Precision Ag Operator':{Communication:0.5,Computers:0.9,Information:0.8,Machinery:0.8,Management:0.4},'Agricultural Engineer':{Communication:0.7,Computers:0.9,Information:0.9,Machinery:0.7,Management:0.7},'Crop Scientist':{Communication:0.7,Computers:0.8,Information:0.9,Machinery:0.4,Management:0.6}};
+
+function fcUpdateRoles(){
+  const sec=document.getElementById('fc-sector').value;
+  document.getElementById('fc-role').innerHTML=FC_ROLES[sec].map(r=>`<option>${r}</option>`).join('');
+}
+
+function fcBar(canvasId,labels,values,colors,xLbl){
+  const cvs=document.getElementById(canvasId);
+  const dpr=window.devicePixelRatio||1,W=cvs.parentElement.clientWidth-4,H=200;
+  cvs.width=W*dpr;cvs.height=H*dpr;cvs.style.width=W+'px';cvs.style.height=H+'px';
+  const c=cvs.getContext('2d');c.scale(dpr,dpr);c.clearRect(0,0,W,H);
+  const P={l:112,r:12,t:8,b:32},CW=W-P.l-P.r,CH=H-P.t-P.b;
+  const maxV=Math.max(...values.map(Math.abs))*1.2||0.1;
+  const px=v=>P.l+(v+maxV)/(2*maxV)*CW;
+  const bH=Math.min(20,(CH/labels.length)-5);
+  const gap=(CH-bH*labels.length)/(labels.length+1);
+  const zeroX=px(0);
+  c.strokeStyle='rgba(0,0,0,0.08)';c.lineWidth=0.7;c.beginPath();c.moveTo(zeroX,P.t);c.lineTo(zeroX,P.t+CH);c.stroke();
+  [-maxV,-maxV/2,0,maxV/2,maxV].forEach(v=>{
+    const x=px(v);c.strokeStyle='rgba(0,0,0,0.04)';c.lineWidth=0.5;c.beginPath();c.moveTo(x,P.t);c.lineTo(x,P.t+CH);c.stroke();
+    c.fillStyle='#aaa';c.font='8px IBM Plex Mono,monospace';c.textAlign='center';c.fillText(v===0?'0':(v>0?'+':'')+v.toFixed(2),x,P.t+CH+14);
+  });
+  labels.forEach((lbl,i)=>{
+    const y=P.t+gap*(i+1)+bH*i;
+    c.fillStyle='#6B6B6B';c.font='11px IBM Plex Sans,sans-serif';c.textAlign='right';c.textBaseline='middle';
+    c.fillText(lbl.length>15?lbl.slice(0,14)+'…':lbl,P.l-6,y+bH/2);
+    const v=values[i],bW=Math.abs(v)/maxV*(CW/2);
+    c.fillStyle=colors[i];c.beginPath();
+    if(c.roundRect)c.roundRect(v>=0?zeroX:zeroX-bW,y,bW,bH,2);else c.rect(v>=0?zeroX:zeroX-bW,y,bW,bH);
+    c.fill();
+    c.fillStyle='#888';c.font='8.5px IBM Plex Mono,monospace';c.textAlign=v>=0?'left':'right';
+    c.fillText((v>=0?'+':'')+v.toFixed(2),v>=0?zeroX+bW+3:zeroX-bW-3,y+bH/2);
+  });
+  if(xLbl){c.fillStyle='#9A9A9A';c.font='10px IBM Plex Sans,sans-serif';c.textAlign='center';c.fillText(xLbl,P.l+CW/2,P.t+CH+28);}
+}
+
+function fcGrouped(canvasId,labels,d1,d2){
+  const cvs=document.getElementById(canvasId);
+  const dpr=window.devicePixelRatio||1,W=cvs.parentElement.clientWidth-4,H=200;
+  cvs.width=W*dpr;cvs.height=H*dpr;cvs.style.width=W+'px';cvs.style.height=H+'px';
+  const c=cvs.getContext('2d');c.scale(dpr,dpr);c.clearRect(0,0,W,H);
+  const P={l:38,r:14,t:28,b:40},CW=W-P.l-P.r,CH=H-P.t-P.b;
+  const allV=[...d1,...d2];const minV=Math.min(...allV)*1.2,maxV=Math.max(...allV)*1.2;
+  const py=v=>P.t+(1-(v-minV)/(maxV-minV))*CH;
+  const n=labels.length,grpW=CW/n,bW=grpW*0.32;
+  [minV,0,maxV/2,maxV].forEach(v=>{
+    const y=py(v);c.strokeStyle='rgba(0,0,0,0.06)';c.lineWidth=0.5;c.beginPath();c.moveTo(P.l,y);c.lineTo(P.l+CW,y);c.stroke();
+    c.fillStyle='#aaa';c.font='8px IBM Plex Mono,monospace';c.textAlign='right';c.fillText((v/1000).toFixed(0)+'k',P.l-3,y+3);
+  });
+  const z=py(0);c.strokeStyle='rgba(0,0,0,0.15)';c.lineWidth=0.8;c.beginPath();c.moveTo(P.l,z);c.lineTo(P.l+CW,z);c.stroke();
+  labels.forEach((lbl,i)=>{
+    const cx=P.l+grpW*(i+0.5);
+    [[d1[i],'rgba(26,75,122,0.8)','rgba(26,75,122,0.4)',-bW-1],[d2[i],'rgba(138,90,0,0.8)','rgba(138,90,0,0.4)',1]].forEach(([v,cSel,cDim,xOff])=>{
+      const y=py(v),h=Math.abs(z-y),barX=cx+xOff;
+      c.fillStyle=i===0?cSel:cDim;
+      if(c.roundRect)c.roundRect(barX,Math.min(y,z),bW,h,2);else c.rect(barX,Math.min(y,z),bW,h);
+      c.fill();c.beginPath();
+    });
+    c.fillStyle='#6B6B6B';c.font='10px IBM Plex Sans,sans-serif';c.textAlign='center';c.fillText(lbl,cx,P.t+CH+14);
+  });
+  c.fillStyle='rgba(26,75,122,0.8)';c.fillRect(P.l,8,9,8);
+  c.fillStyle='#6B6B6B';c.font='10px IBM Plex Sans,sans-serif';c.textAlign='left';c.fillText('SARIMA Baseline',P.l+12,15);
+  c.fillStyle='rgba(138,90,0,0.8)';c.fillRect(P.l+115,8,9,8);c.fillText('AI-Adjusted',P.l+127,15);
+}
+
+function fcGenerate(){
+  const sector=document.getElementById('fc-sector').value;
+  const role=document.getElementById('fc-role').value;
+  const horizon=parseInt(document.getElementById('fc-horizon').value);
+  const isAI=document.getElementById('fc-scenario').value==='ai';
+  const scLabel=isAI?'AI-Adjusted':'SARIMA Baseline';
+  const row=FC_PANEL[sector];
+  const totalNet=isAI?row.ai_total:row.sarima;
+  const annRate=(totalNet/10)/row.emp2023;
+  const exposure=FC_EXPOSURE[role]||0.5;
+  const roleRate=isAI?annRate*(1+0.10*exposure):annRate;
+  const hzPct=(Math.pow(1+roleRate,horizon)-1)*100;
+  const annPct=roleRate*100;
+  const pctStr=(hzPct>=0?'+':'')+hzPct.toFixed(1)+'%';
+  const annStr=(annPct>=0?'+':'')+annPct.toFixed(2)+'%/yr';
+  const direction=roleRate>0?'growing':'contracting';
+  const skills=FC_SKILLS[role]||{};
+  const sData=Object.entries(skills).map(([s,imp])=>({skill:s,importance:imp,signal:imp*(FC_WEIGHTS[s]||0)})).sort((a,b)=>b.signal-a.signal);
+  const topSkills=sData.filter(s=>s.signal>0).map(s=>s.skill);
+  const declining=sData.filter(s=>s.signal<0).map(s=>s.skill);
+  const topSkill=sData[0].skill;
+  const expLabel=exposure>0.6?'High exposure — prioritize digital upskilling':exposure>0.35?'Moderate exposure — blend technical and digital training':'Lower exposure — focus on technical skill retention';
+  const aiNote=isAI?` AI adoption contributes an estimated <strong>+${Math.round(row.ai_effect).toLocaleString()} jobs</strong> above the SARIMA baseline across ${sector}.`:` Under the AI-Adjusted scenario, ${sector} would add an estimated <strong>+${Math.round(row.ai_effect).toLocaleString()} more jobs</strong>.`;
+  const tCol=roleRate>=0?'var(--teal)':'var(--red)';
+  const aiStr=(row.ai_effect>=0?'+':'')+Math.round(row.ai_effect).toLocaleString();
+
+  document.getElementById('fc-out-title').textContent=`Skills Intelligence: ${role}`;
+  document.getElementById('fc-out-meta').innerHTML=`<span>${sector}</span> · <span>${scLabel}</span> · <span>${horizon}-Year Horizon</span> &nbsp;|&nbsp; Annual rate: ${annPct.toFixed(2)}% · AI exposure: ${exposure.toFixed(4)}`;
+  document.getElementById('fc-kpis').innerHTML=`
+    <div class="fc-kpi"><div class="fc-kpi-val" style="color:var(--blue)">${annStr}</div><div class="fc-kpi-lbl">Annual Sector Growth</div></div>
+    <div class="fc-kpi"><div class="fc-kpi-val" style="color:${tCol}">${pctStr}</div><div class="fc-kpi-lbl">${horizon}-Year Trend</div></div>
+    <div class="fc-kpi"><div class="fc-kpi-val" style="color:var(--amber)">${aiStr}</div><div class="fc-kpi-lbl">AI Effect on Sector Jobs</div></div>
+    <div class="fc-kpi"><div class="fc-kpi-val" style="color:var(--navy)">${exposure.toFixed(2)}</div><div class="fc-kpi-lbl">Role AI Exposure</div></div>
+    <div class="fc-kpi"><div class="fc-kpi-val" style="font-size:13px;padding-top:5px;color:var(--blue)">${topSkill}</div><div class="fc-kpi-lbl">Most Critical Skill</div></div>`;
+  document.getElementById('fc-reco').innerHTML=`
+    <h4>Skills Intelligence: ${role} Hiring in ${sector}</h4>
+    <p><strong>Sector trend:</strong> California ${sector} is <strong>${direction}</strong> at <strong>${Math.abs(annPct).toFixed(2)}% per year</strong> under the ${scLabel} scenario. Over ${horizon} year(s), sector-level data suggests a <strong>${pctStr} directional shift</strong> in demand for ${role} skills.${aiNote}</p>
+    <p style="margin-top:8px;font-size:12px;color:var(--muted)">This is a sector-level trend signal, not a company headcount forecast. Use it to understand which skills are growing or declining and inform your hiring and training strategy accordingly.</p>
+    <p style="margin-top:10px"><strong>Skills to prioritize in new hires:</strong></p>
+    <div class="fc-pills">${topSkills.map(s=>`<span class="fc-pill fc-pill-pos">${s}</span>`).join('')}</div>
+    <p style="margin-top:12px"><strong>Skills under automation pressure:</strong></p>
+    <div class="fc-pills">${declining.map(s=>`<span class="fc-pill fc-pill-neg">${s}</span>`).join('')}</div>
+    <p style="margin-top:12px"><strong>Reskilling priority:</strong> AI exposure score is <strong>${exposure.toFixed(4)}</strong> — ${expLabel}.</p>`;
+  document.getElementById('fc-skill-title').textContent=`Skill demand profile — ${role}`;
+  setTimeout(()=>{
+    fcBar('fc-skill-canvas',sData.map(s=>s.skill),sData.map(s=>s.signal*100),sData.map(s=>s.signal>=0?'rgba(29,107,82,0.75)':'rgba(139,32,32,0.75)'),'Skill demand signal');
+    fcGrouped('fc-sector-canvas',Object.keys(FC_PANEL),Object.values(FC_PANEL).map(r=>r.sarima),Object.values(FC_PANEL).map(r=>r.ai_total));
+  },60);
+  const out=document.getElementById('fc-output');out.style.display='block';out.scrollIntoView({behavior:'smooth',block:'start'});
+}
+fcUpdateRoles();
+</script>
+</body>
+</html>
