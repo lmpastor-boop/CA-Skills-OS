@@ -175,8 +175,6 @@ body { font-family: var(--sans); background: var(--cream); color: var(--dark); m
 .f-btn.active[data-w="Mid-low"] { background: var(--amber); color: #fff; border-color: var(--amber); }
 .f-btn.active[data-w="Low"]     { background: var(--red);   color: #fff; border-color: var(--red); }
 .f-btn.active[data-w="all"]     { background: var(--navy);  color: #fff; border-color: var(--navy); }
-.search-input { font-size: 13px; padding: 6px 12px; border-radius: 7px; border: 1px solid var(--border2); background: var(--white); color: var(--dark); font-family: var(--sans); width: 190px; outline: none; }
-.search-input:focus { border-color: var(--navy); }
 .view-toggle { display: flex; gap: 6px; }
 .v-btn { font-size: 12.5px; font-family: var(--sans); padding: 6px 14px; border-radius: 7px; border: 1px solid var(--border2); background: var(--cream); color: var(--muted); cursor: pointer; transition: all .14s; }
 .v-btn.active { background: var(--navy); color: #fff; border-color: var(--navy); font-weight: 500; }
@@ -254,6 +252,51 @@ canvas { display: block; width: 100%; }
 .fc-chart-card { background: var(--white); border: 1px solid var(--border2); border-radius: 12px; padding: 18px 20px; }
 .fc-chart-card h4 { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
 .fc-model-note { font-size: 11px; color: var(--light); font-family: var(--mono); line-height: 1.7; padding: 14px 18px; background: var(--cream); border-radius: 8px; border: 1px solid var(--border); margin-top: 4px; }
+
+/* ── Mobile responsive ── */
+@media (max-width: 768px) {
+  body { flex-direction: column; }
+  .sidebar {
+    width: 100%; height: auto; position: relative;
+    flex-direction: row; flex-wrap: wrap; overflow-y: visible;
+    border-right: none; border-bottom: 1px solid var(--border2);
+  }
+  .sidebar-logo { padding: 14px 16px 12px; border-bottom: none; flex: 1; min-width: 0; }
+  .logo-mark { font-size: 15px; }
+  .logo-sub { display: none; }
+  .nav-section { padding: 0; display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; border-top: 1px solid var(--border); }
+  .nav-section-label { display: none; }
+  .nav-item { padding: 10px 12px; border-left: none; border-bottom: 3px solid transparent; flex-direction: column; align-items: center; gap: 3px; min-width: 72px; flex: 1; }
+  .nav-item.active { border-bottom-color: var(--teal); border-left: none; }
+  .nav-icon { width: 22px; height: 22px; font-size: 11px; }
+  .nav-label { font-size: 10px; text-align: center; }
+  .nav-sub { display: none; }
+  .sidebar-scope { display: none; }
+  .page { padding: 20px 16px 48px; }
+  .page-title { font-size: 26px; }
+  .page-desc { font-size: 13px; margin-bottom: 24px; padding-bottom: 20px; }
+  .stat-row { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .card-grid { grid-template-columns: 1fr; }
+  .card-grid.triple { grid-template-columns: 1fr; }
+  .two-col { grid-template-columns: 1fr; }
+  .metrics-row { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .controls-bar { padding: 12px 14px; gap: 12px; }
+  .btn-row { flex-wrap: wrap; gap: 5px; }
+  .s-btn { font-size: 12px; padding: 6px 11px; }
+  .fc-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .fc-kpi-row { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .fc-charts { grid-template-columns: 1fr; }
+  .filter-bar { gap: 8px; }
+  .view-toggle { width: 100%; }
+  .v-btn { flex: 1; text-align: center; }
+  #wageRow { width: 100%; }
+  #occDropWrap { width: 100%; }
+  #occDrop { width: 100% !important; }
+  .map-layout { grid-template-columns: 1fr; }
+  .sec-grid4 { grid-template-columns: 1fr; }
+  .cmp-grid { grid-template-columns: 1fr 1fr; }
+  footer { padding: 20px 16px; }
+}
 
 /* ── Footer ── */
 footer { padding: 32px 52px; font-size: 11.5px; color: var(--light); font-family: var(--mono); border-top: 1px solid var(--border); }
@@ -336,31 +379,40 @@ footer { padding: 32px 52px; font-size: 11.5px; color: var(--light); font-family
     </div>
     <div class="card-grid">
       <div class="card">
-        <div class="card-title">What each tool helps answer</div>
-        <div class="card-body">The Scenario Simulator shows how skill shares shift under low and high AI adoption. The Workforce Explorer plots occupations by AI exposure and wage. The Geographic Map shows where sector employment and displacement pressure concentrate across California.</div>
+        <div class="card-title">⚡ Workforce Forecaster</div>
+        <div class="card-body">Select a sector and job role to generate a skills intelligence signal built on ARIMA(1,1,1) forecasts of CA EDD monthly employment data (1990–2025) combined with O*NET macro skill weights. Outputs include a directional growth rate, AI exposure score, skills to prioritize in hiring, and skills under automation pressure. Two scenarios: Baseline (SARIMA) and AI-Adjusted.</div>
       </div>
       <div class="card">
-        <div class="card-title">Why California-specific interpretation matters</div>
-        <div class="card-body">The same signal looks very different depending on regional labor composition and policy context. Agriculture in the Central Valley, logistics in the Inland Empire, and clean energy across the Bay Area all respond differently to AI adoption pressure.</div>
+        <div class="card-title">⟳ Scenario Simulator</div>
+        <div class="card-body">Shows how employment-weighted skill shares shift across all four sectors as AI adoption scales. Toggle between Baseline and High adoption (45/38% automation of computers/machinery tasks) and watch skill demand reallocate in real time. The key finding: Communication grows in every sector under every scenario.</div>
       </div>
       <div class="card">
-        <div class="card-title">How to read the skill shares</div>
-        <div class="card-body">Each occupation carries a skill profile — the share of its work that falls into Communication, Computers, Information, Machinery, and Management. These shares are employment-weighted to reflect where California's sector workforce actually sits, not what's most common nationally.</div>
+        <div class="card-title">◉ Workforce Explorer</div>
+        <div class="card-body">Plots California's major occupations as bubbles by AI exposure and median wage — size reflects employment. Filter by wage tier or select a specific occupation from the dropdown. Switch to the sector view for four independent panels. Hover any bubble for employment, wage, and exposure details.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">⊕ Geographic Map</div>
+        <div class="card-body">Shows where sector employment concentrates and where displacement pressure is highest across 25 California MSAs. Toggle between employment mode (sector workforce by metro) and displacement pressure mode (share of workers in high-automation occupations). Click any metro bubble or ranking row to inspect its breakdown.</div>
+      </div>
+    </div>
+    <div class="section-heading">How to read the skill shares</div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-title">What the five macro skills mean</div>
+        <div class="card-body">Each occupation carries a skill profile from O*NET — the share of its work falling into Communication, Computers, Information, Machinery, and Management. These shares are employment-weighted to reflect where California's sector workforce actually sits, not what's most common nationally. The Scenario Simulator and Workforce Forecaster both draw on these weights.</div>
       </div>
       <div class="card">
         <div class="card-title">Suggested 3-minute walkthrough</div>
-        <div class="card-body">Start with the Scenario Simulator — select Transportation and toggle to High Adoption to see the clearest skill shift story. Then open the Geographic Map and switch to Displacement Pressure to see where transition pressure concentrates geographically.</div>
+        <div class="card-body">Start with the Workforce Forecaster — select Construction, Electrician, 3 Years, AI-Adjusted to see a role-level skills signal. Then open the Scenario Simulator, select Transportation and toggle to High Adoption to see the clearest sector-level shift. Finish with the Geographic Map on Displacement Pressure to see where the risk concentrates geographically.</div>
       </div>
     </div>
     <div class="section-heading">Data sources</div>
     <div class="card-grid triple">
       <div class="card"><div class="card-title" style="font-size:15px">BLS OEWS May 2024</div><div class="card-body">Occupation-level employment and wages for all 25 California MSAs. The primary employment data source.</div></div>
-      <div class="card"><div class="card-title" style="font-size:15px">ONET Macro Skills</div><div class="card-body">Five macro skill shares per occupation — Communication, Computers, Information, Machinery, Management.</div></div>
-      <div class="card"><div class="card-title" style="font-size:15px">Scenario modeling</div><div class="card-body">Mechanical displacement model: low (10/8%) and high (45/38%) automation of computers/machinery tasks.</div></div>
+      <div class="card"><div class="card-title" style="font-size:15px">ONET Macro Skills</div><div class="card-body">Five macro skill shares per occupation — Communication, Computers, Information, Machinery, Management. Used for both the Scenario Simulator and AI exposure scoring.</div></div>
+      <div class="card"><div class="card-title" style="font-size:15px">CA EDD 1990–2025</div><div class="card-body">Monthly employment data used to fit the ARIMA(1,1,1) model in the Workforce Forecaster. 35 years of sector-level trend data.</div></div>
     </div>
   </div>
-
-  <!-- PAGE: Workforce Forecaster -->
   <div class="page" id="page-forecaster">
     <div class="page-eyebrow">Decision Tools</div>
     <h1 class="page-title">Workforce Forecaster</h1>
@@ -471,7 +523,7 @@ footer { padding: 32px 52px; font-size: 11.5px; color: var(--light); font-family
   <div class="page" id="page-explorer">
     <div class="page-eyebrow">Decision Tools</div>
     <h1 class="page-title">Workforce Explorer</h1>
-    <p class="page-desc">California's major occupations plotted by AI exposure and median wage. Bubble size reflects employment. Filter by wage tier or search by occupation name.</p>
+    <p class="page-desc">California's major occupations plotted by AI exposure and median wage. Bubble size reflects employment. Filter by wage tier or select a specific occupation from the dropdown.</p>
 
     <div class="filter-bar">
       <div class="view-toggle">
@@ -486,7 +538,12 @@ footer { padding: 32px 52px; font-size: 11.5px; color: var(--light); font-family
         <button class="f-btn" data-w="Mid-low">Mid-low</button>
         <button class="f-btn" data-w="Low">Low &lt;$43k</button>
       </div>
-      <input class="search-input" id="search" type="text" placeholder="Search occupation…">
+      <div id="occDropWrap" style="display:flex;align-items:center;gap:7px">
+        <span class="filter-lbl">Occupation:</span>
+        <select id="occDrop" class="fc-select" style="width:260px;font-size:12px;padding:6px 28px 6px 10px">
+          <option value="">All occupations</option>
+        </select>
+      </div>
     </div>
 
     <div id="viewAll">
@@ -677,9 +734,9 @@ const WC={'High':'#1A4B7A','Mid-high':'#1D6B52','Mid-low':'#8A5A00','Low':'#8B20
 const WA={'High':'rgba(26,75,122,.6)','Mid-high':'rgba(29,107,82,.6)','Mid-low':'rgba(138,90,0,.6)','Low':'rgba(139,32,32,.6)'};
 const SC2={Agriculture:'#1D6B52',Construction:'#8A5A00',Transportation:'#1A4B7A',Energy:'#8B2020'};
 const SA={Agriculture:'rgba(29,107,82,.65)',Construction:'rgba(138,90,0,.65)',Transportation:'rgba(26,75,122,.65)',Energy:'rgba(139,32,32,.65)'};
-let aWage='all',aSearch='',charts2={};
+let aWage='all',aOcc='',charts2={};
 
-function filt(){return D.filter(d=>(aWage==='all'||d.b===aWage)&&(!aSearch||d.t.toLowerCase().includes(aSearch.toLowerCase())));}
+function filt(){return D.filter(d=>(aWage==='all'||d.b===aWage)&&(!aOcc||d.t===aOcc));}
 
 function bubble(cid,wid,tpId,tpTId,tpBId,xk,dtId,dmId){
   const cvs=document.getElementById(cid),wrap=document.getElementById(wid);
@@ -756,11 +813,37 @@ function buildSectors(){
   });
   setTimeout(()=>{Object.entries(S2).forEach(([sec,pts])=>secBub('sc_'+sec,'scw_'+sec,pts,SC2[sec],SA[sec]));},60);
 }
-document.getElementById('btnAll').onclick=()=>{document.getElementById('viewAll').style.display='';document.getElementById('viewSec').style.display='none';document.getElementById('btnAll').classList.add('active');document.getElementById('btnSec').classList.remove('active');document.getElementById('wageRow').style.display='flex';document.querySelector('.search-input').style.display='';buildAll();};
-document.getElementById('btnSec').onclick=()=>{document.getElementById('viewAll').style.display='none';document.getElementById('viewSec').style.display='';document.getElementById('btnSec').classList.add('active');document.getElementById('btnAll').classList.remove('active');document.getElementById('wageRow').style.display='none';document.querySelector('.search-input').style.display='none';buildSectors();};
-document.querySelectorAll('.f-btn').forEach(b=>b.addEventListener('click',()=>{aWage=b.dataset.w;document.querySelectorAll('.f-btn').forEach(x=>x.classList.toggle('active',x.dataset.w===aWage));buildAll();}));
-document.getElementById('search').addEventListener('input',e=>{aSearch=e.target.value;buildAll();});
-window.addEventListener('resize',()=>{if(document.getElementById('viewAll').style.display!=='none')buildAll();else buildSectors();});
+document.getElementById('btnAll').onclick=()=>{
+  document.getElementById('viewAll').style.display='';document.getElementById('viewSec').style.display='none';
+  document.getElementById('btnAll').classList.add('active');document.getElementById('btnSec').classList.remove('active');
+  document.getElementById('wageRow').style.display='flex';document.getElementById('occDropWrap').style.display='flex';
+  buildAll();
+};
+document.getElementById('btnSec').onclick=()=>{
+  document.getElementById('viewAll').style.display='none';document.getElementById('viewSec').style.display='';
+  document.getElementById('btnSec').classList.add('active');document.getElementById('btnAll').classList.remove('active');
+  document.getElementById('wageRow').style.display='none';document.getElementById('occDropWrap').style.display='none';
+  buildSectors();
+};
+document.querySelectorAll('.f-btn').forEach(b=>b.addEventListener('click',()=>{
+  aWage=b.dataset.w;
+  document.querySelectorAll('.f-btn').forEach(x=>x.classList.toggle('active',x.dataset.w===aWage));
+  document.getElementById('occDrop').value=''; aOcc='';
+  buildAll();
+}));
+document.getElementById('occDrop').addEventListener('change',e=>{
+  aOcc=e.target.value;
+  if(aOcc){aWage='all';document.querySelectorAll('.f-btn').forEach(x=>x.classList.toggle('active',x.dataset.w==='all'));}
+  buildAll();
+});
+// Populate occupation dropdown alphabetically
+(function(){
+  const drop=document.getElementById('occDrop');
+  [...D].sort((a,b)=>a.t.localeCompare(b.t)).forEach(d=>{
+    const opt=document.createElement('option');opt.value=d.t;opt.textContent=d.t;drop.appendChild(opt);
+  });
+})();
+window.addEventListener('resize',()=>{if(document.getElementById('page-explorer').classList.contains('active')){if(document.getElementById('viewAll').style.display!=='none')buildAll();else buildSectors();}if(document.getElementById('page-geo').classList.contains('active'))drawMap();});
 
 // ── GEO MAP DATA ──────────────────────────────────────────────────────────────
 const SEC_EMP={Agriculture:[{n:'Salinas',e:30750,c:0.1224,lat:36.68,lng:-121.66},{n:'Bakersfield',e:36930,c:0.1252,lat:35.37,lng:-119.02},{n:'Fresno',e:30810,c:0.1252,lat:36.74,lng:-119.79},{n:'Visalia',e:24160,c:0.1252,lat:36.33,lng:-119.29},{n:'Santa Maria-SB',e:13110,c:0.1225,lat:34.95,lng:-120.44},{n:'Riverside-SB',e:6340,c:0.1247,lat:33.98,lng:-117.37},{n:'Modesto',e:5580,c:0.1252,lat:37.64,lng:-120.99},{n:'Merced',e:4670,c:0.1225,lat:37.30,lng:-120.48},{n:'Napa',e:4550,c:0.1284,lat:38.30,lng:-122.29},{n:'Sacramento',e:4840,c:0.1247,lat:38.58,lng:-121.49},{n:'Oxnard-Ventura',e:5840,c:0.1228,lat:34.27,lng:-119.23},{n:'Los Angeles',e:4260,c:0.1266,lat:34.05,lng:-118.24},{n:'Stockton',e:6100,c:0.1288,lat:37.96,lng:-121.29},{n:'SF Bay',e:1660,c:0.1274,lat:37.77,lng:-122.42},{n:'El Centro',e:3740,c:0.1284,lat:32.79,lng:-115.56},{n:'Hanford',e:3530,c:0.1263,lat:36.33,lng:-119.65},{n:'Santa Rosa',e:3160,c:0.1231,lat:38.44,lng:-122.71},{n:'San Diego',e:2110,c:0.1289,lat:32.72,lng:-117.16},{n:'Chico',e:590,c:0.1294,lat:39.73,lng:-121.84},{n:'Yuba City',e:1160,c:0.1263,lat:39.14,lng:-121.62},{n:'Redding',e:210,c:0.1272,lat:40.59,lng:-122.39},{n:'Vallejo',e:210,c:0.1282,lat:38.10,lng:-122.26},{n:'San Jose',e:1550,c:0.1239,lat:37.34,lng:-121.89}],
